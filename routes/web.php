@@ -20,3 +20,5 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', [PageController::class, 'index']);
+Route::get('/account', [PageController::class, 'account'])->name('account')->middleware('auth');
+Route::get('/dashboard', [PageController::class, 'dashboard'])->name('dashboard')->middleware('admin');
