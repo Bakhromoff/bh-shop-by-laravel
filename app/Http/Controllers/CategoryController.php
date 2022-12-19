@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
+use App\Models\HeadCategory;
 
 class CategoryController extends Controller
 {
@@ -14,7 +16,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $headcategories = HeadCategory::all();
+        $categories = Category::all();
+        return view('admin.categories.index', compact('headcategories', 'categories'));
     }
 
     /**
@@ -24,7 +28,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        $headcategories = HeadCategory::all();
+        return view('admin.categories.create', compact('headcategories'));
     }
 
     /**
@@ -35,7 +40,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_ru' => 'required|max:20',
+            'name_uz' => 'required|max:20',
+            'emoji' => 'required',
+            'head_category_id' => 'required',
+        ]);
+        Category::create($request->all());
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -57,7 +69,8 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        $headcategories = HeadCategory::all();
+        return view('admin.categories.edit', compact('category', 'headcategories'));
     }
 
     /**
@@ -69,7 +82,18 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $request->validate([
+            'name_ru' => 'required|max:20',
+            'name_uz' => 'required|max:20',
+            'emoji' => 'required',
+            'head_category_id' => 'required',
+        ]);
+        $category->name_ru = $request->name_ru;
+        $category->name_uz = $request->name_uz;
+        $category->emoji = $request->emoji;
+        $category->head_category_id = $request->head_category_id;
+        $category->save();
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -80,6 +104,12 @@ class CategoryController extends Controller
      */
     public function destroy(Category $category)
     {
-        //
+        $products = Product::where('category_id', $category->id)->count();
+        if($products == 0) {
+            $category->delete();
+            return redirect()->back();
+        } else {
+            return redirect()->back()->withErrors(['delete' => "Siz ushbu kategoriyani o`chira olmaysiz chunki Products jadvalida bu kategoriyaga bog`liq ma`lumotlar bor"]);
+        }
     }
 }

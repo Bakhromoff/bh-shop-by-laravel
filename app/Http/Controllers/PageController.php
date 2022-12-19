@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\HeadCategory;
 
 class PageController extends Controller
 {
@@ -12,7 +13,7 @@ class PageController extends Controller
     public function account() {
         return view('account');
     }
-    public function dashboard() {
-        return view('admin.categories');
+    public function admin() {
+        return redirect()->route('categories.index');
     }
 }

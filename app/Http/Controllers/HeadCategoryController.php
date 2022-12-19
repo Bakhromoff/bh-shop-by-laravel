@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\HeadCategory;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HeadCategoryController extends Controller
@@ -24,7 +25,7 @@ class HeadCategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.headcategories.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class HeadCategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_ru' => 'required',
+            'name_uz' => 'required',
+            'emoji' => 'required',
+        ]);
+        HeadCategory::create($request->all());
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -55,9 +62,9 @@ class HeadCategoryController extends Controller
      * @param  \App\Models\HeadCategory  $headCategory
      * @return \Illuminate\Http\Response
      */
-    public function edit(HeadCategory $headCategory)
+    public function edit(HeadCategory $headcategory)
     {
-        //
+        return view('admin.headcategories.edit', compact('headcategory'));
     }
 
     /**
@@ -67,9 +74,18 @@ class HeadCategoryController extends Controller
      * @param  \App\Models\HeadCategory  $headCategory
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, HeadCategory $headCategory)
+    public function update(Request $request, HeadCategory $headcategory)
     {
-        //
+        $request->validate([
+            'name_ru' => 'required|max:20',
+            'name_uz' => 'required|max:20',
+            'emoji' => 'required',
+        ]);
+        $headcategory->name_ru = $request->name_ru;
+        $headcategory->name_uz = $request->name_uz;
+        $headcategory->emoji = $request->emoji;
+        $headcategory->save();
+        return redirect()->route('categories.index');
     }
 
     /**
@@ -78,8 +94,14 @@ class HeadCategoryController extends Controller
      * @param  \App\Models\HeadCategory  $headCategory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(HeadCategory $headCategory)
+    public function destroy(HeadCategory $headcategory)
     {
-        //
+        $categoriesCount = Category::where('head_category_id', $headcategory->id)->count();
+        if($categoriesCount == 0) {
+            $headcategory->delete();
+            return redirect()->back();
+        } else {
+            return redirect()->back()->withErrors(['delete' => "Siz ushbu kategoriyani o`chira olmaysiz chunki Categories jadvalida bu kategoriyaga bog`liq ma`lumotlar bor"]);
+        }
     }
 }
