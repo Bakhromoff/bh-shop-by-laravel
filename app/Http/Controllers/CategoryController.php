@@ -45,8 +45,22 @@ class CategoryController extends Controller
             'name_uz' => 'required|max:20',
             'emoji' => 'required',
             'head_category_id' => 'required',
+            'image' => 'required|mimes:jpg,png,jpeg,svg|max:2048',
         ]);
-        Category::create($request->all());
+        $category = new Category;
+        if($request->has('top')) {
+            $category->isTop = 1;
+        } else {
+            $category->isTop = 0;
+        }
+        $category->name_ru = $request->name_ru;
+        $category->name_uz = $request->name_uz;
+        $category->emoji = $request->emoji;
+        $category->head_category_id = $request->head_category_id;
+        $image = md5(microtime().rand(1,999)).'.'.$request->file('image')->extension();
+        $request->file('image')->storeAs('public/category_images/', $image);
+        $category->image = $image;
+        $category->save();
         return redirect()->route('categories.index');
     }
 
@@ -87,11 +101,28 @@ class CategoryController extends Controller
             'name_uz' => 'required|max:20',
             'emoji' => 'required',
             'head_category_id' => 'required',
+
         ]);
+        if($request->has('top')) {
+            $category->isTop = 1;
+        } else {
+            $category->isTop = 0;
+        }
+
         $category->name_ru = $request->name_ru;
         $category->name_uz = $request->name_uz;
         $category->emoji = $request->emoji;
         $category->head_category_id = $request->head_category_id;
+        if($request->has('image')) {
+            $image = md5(microtime().rand(1,999)).'.'.$request->file('image')->extension();
+        $request->file('image')->storeAs('public/category_images/', $image);
+        if($request->file('image')->storeAs('public/category_images/', $image)) {
+            if(file_exists('storage/category_images/'.$category->image)) {
+                unlink('storage/category_images/'.$category->image);
+            }
+        }
+        $category->image = $image;
+        }
         $category->save();
         return redirect()->route('categories.index');
     }
