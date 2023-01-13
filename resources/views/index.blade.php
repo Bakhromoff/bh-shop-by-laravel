@@ -8,35 +8,30 @@
 
 @section('content')
     <!--=============================================
-        =            Hero slider Area         =
-        =============================================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            =            Hero slider Area         =
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            =============================================-->
 
     <div class="hero-slider-container mb-35">
         <!--=======  Slider area  =======-->
 
         <div class="hero-slider-one">
             <!--=======  hero slider item  =======-->
+            @foreach ($products as $product)
+                @if ($product->price > 10000)
+                    <div class="hero-slider-item slider-bg"
+                        style="background-image: url({{ $product->getImage() }}); background-size: contain;">
+                        <div class="slider-content d-flex flex-column justify-content-center align-items-center">
+                            <h1 style="color: rgba(0, 0, 0, 0.5);">{{ $product->name_uz }}</h1>
+                            <p style="color: rgba(0, 0, 0, 0.5);">{!! Str::limit(strip_tags($product->description_uz), 100) !!}...</p>
+                            <a href="shop-left-sidebar.html" class="slider-btn">Xarid qilish</a>
+                        </div>
+                    </div>
+                @endif
+            @endforeach
 
-            <div class="hero-slider-item slider-bg-1">
-                <div class="slider-content d-flex flex-column justify-content-center align-items-center">
-                    <h1>Organic Farm</h1>
-                    <p>get fresh food from our firm to your table</p>
-                    <a href="shop-left-sidebar.html" class="slider-btn">SHOP NOW</a>
-                </div>
-            </div>
 
             <!--=======  End of hero slider item  =======-->
 
-
-            <!--=======  Hero slider item  =======-->
-
-            <div class="hero-slider-item slider-bg-2">
-                <div class="slider-content d-flex flex-column justify-content-center align-items-center">
-                    <h1>Fresh & Nature</h1>
-                    <p>get fresh food from our firm to your table</p>
-                    <a href="shop-left-sidebar.html" class="slider-btn">SHOP NOW</a>
-                </div>
-            </div>
 
             <!--=======  End of Hero slider item  =======-->
 
@@ -51,8 +46,8 @@
 
 
     <!--=============================================
-            =            Policy area         =
-            =============================================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                =            Policy area         =
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                =============================================-->
 
     <div class="policy-section mb-35">
         <div class="container">
@@ -79,8 +74,8 @@
                         <!--=======  End of single policy  =======-->
 
                         <!--=============================================
-                                    =            single policy         =
-                                    =============================================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =            single policy         =
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =============================================-->
 
                         <div class="single-policy">
                             <span><img src="assets/images/policy-icon3.png" class="img-fluid" alt=""></span>
@@ -98,8 +93,8 @@
     <!--=====  End of Policy area  ======-->
 
     <!--=============================================
-                    =            category slider         =
-                    =============================================-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =            category slider         =
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =============================================-->
 
     <div class="slider category-slider mb-35">
         <div class="container">
@@ -121,125 +116,27 @@
 
                     <div class="category-slider-container">
 
-                        <!--=======  single category  =======-->
+                        @foreach ($categories as $category)
+                            <!--=======  single category  =======-->
+                            @if ($category->isTop === 1)
+                                <div class="single-category">
+                                    <div class="category-image">
+                                        <a href="#{{ $category->name_ru }}" title="{{ $category->name_ru }}"
+                                            style="width: 131px; height: 131px;">
+                                            <img src="{{ $category->getImage() }}" class="img-fluid"
+                                                style="object-fit: fill; width: 121px; height: 121px;" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="category-title">
+                                        <h3>
+                                            <a href="#{{ $category->name_ru }}">{{ $category->name_ru }}</a>
+                                        </h3>
+                                    </div>
+                                </div>
+                            @endif
 
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Vegetables">
-                                    <img src="assets/images/categories/category1.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Vegetables</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Fast Food">
-                                    <img src="assets/images/categories/category2.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Fast Food</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Fish & Meats">
-                                    <img src="assets/images/categories/category3.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Fish & Meats</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Fruits">
-                                    <img src="assets/images/categories/category4.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Fruits</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Salads">
-                                    <img src="assets/images/categories/category5.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Salads</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Bread">
-                                    <img src="assets/images/categories/category6.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Bread</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Beans">
-                                    <img src="assets/images/categories/category7.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Beans</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
+                            <!--=======  End of single category  =======-->
+                        @endforeach
 
                     </div>
 
@@ -252,1325 +149,70 @@
 
     <!--=====  End of category slider  ======-->
 
-    <!--=============================================
-                        =            Tab slider         =
-                        =============================================-->
 
-    <div class="slider tab-slider mb-35">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="tab-slider-wrapper">
-                        <nav>
-                            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="featured-tab" data-toggle="tab" href="#featured"
-                                    role="tab" aria-selected="true">Featured</a>
-                                <a class="nav-item nav-link" id="new-arrival-tab" data-toggle="tab" href="#new-arrivals"
-                                    role="tab" aria-selected="false">New Arrival</a>
-                                <a class="nav-item nav-link" id="nav-onsale-tab" data-toggle="tab" href="#on-sale"
-                                    role="tab" aria-selected="false">On Sale</a>
-                            </div>
-                        </nav>
-                        <div class="tab-content" id="nav-tabContent">
-                            <div class="tab-pane fade show active" id="featured" role="tabpanel"
-                                aria-labelledby="featured-tab">
-                                <!--=======  tab slider container  =======-->
-
-                                <div class="tab-slider-container">
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product01.jpg" class="img-fluid"
+    <section class="products py-5">
+        <div class="container" style="box-shadow: 0px 5px 4px 0px rgb(0 0 0 / 10%);">
+            @foreach ($categories as $category)
+                @if ($category->category_products->count())
+                    <div class="products_list" id="{{ $category->name_ru }}">
+                        <h3 class="text-left">{{ $category->name_ru }}</h3>
+                        <div class="row pb-4">
+                            @foreach ($products as $product)
+                                @if ($product->category_id == $category->id)
+                                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-6 p-0">
+                                        <div class="gf-product tab-slider-sub-product" style="border: 1px solid #e0e0e0;">
+                                            <div class="image" style="">
+                                                <a href="single-product.html" tabindex="0">
+                                                    @if ($product->isSale === 1)
+                                                        <span class="onsale">Sale!</span>
+                                                    @endif
+                                                    <img src="{{ $product->getImage() }}" class="img-fluid"
+                                                        style="width: 325px; height: 270px; object-fit: contain"
                                                         alt="">
                                                 </a>
                                                 <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart">
+                                                    <a class="active" href="#" data-tooltip="Add to cart"
+                                                        tabindex="0">
                                                         <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
+                                                    <a href="#" data-tooltip="Add to wishlist" tabindex="0"> <span
                                                             class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
+                                                    <a href="#" data-tooltip="Compare" tabindex="0"> <span
                                                             class="arrow_left-right_alt"></span> </a>
                                                     <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
+                                                        data-target="#quick-view-modal-container" tabindex="0"> <span
                                                             class="icon_search"></span> </a>
                                                 </div>
                                             </div>
                                             <div class="product-content">
                                                 <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
+                                                    <a href="shop-left-sidebar.html"
+                                                        tabindex="0">{{ $product->category->name_ru }}</a>
                                                 </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
+                                                <h3 class="product-title"><a href=""
+                                                        tabindex="0">{{ $product->name_ru }}</a></h3>
                                                 <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
+                                                    @if ($product->price < $product->old_price)
+                                                        <span class="main-price">{{ $product->old_price }} сум</span>
+                                                    @endif
+                                                    <span class="discounted-price">{{ $product->price }}</span>
                                                 </div>
                                             </div>
 
                                         </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product02.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
 
                                     </div>
-                                    <!--=======  End of single tab slider product  =======-->
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
+                                @endif
+                            @endforeach
 
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product03.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product04.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product05.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product06.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart">
-                                                        <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product07.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product08.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-
-                                    <!--=======  single tab slider item  =======-->
-
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product09.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart">
-                                                        <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product10.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-                                </div>
-
-                                <!--=======  End of tab slider container  =======-->
-                            </div>
-                            <div class="tab-pane fade" id="new-arrivals" role="tabpanel"
-                                aria-labelledby="new-arrival-tab">
-                                <!--=======  tab slider container  =======-->
-
-                                <div class="tab-slider-container">
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product03.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product04.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product01.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart">
-                                                        <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product02.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product05.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product06.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart">
-                                                        <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product07.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product08.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-
-                                    <!--=======  single tab slider item  =======-->
-
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product09.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart">
-                                                        <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product10.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-                                </div>
-
-                                <!--=======  End of tab slider container  =======-->
-                            </div>
-                            <div class="tab-pane fade" id="on-sale" role="tabpanel" aria-labelledby="nav-onsale-tab">
-                                <!--=======  tab slider container  =======-->
-
-                                <div class="tab-slider-container">
-                                    <!--=======  single tab slider item  =======-->
-
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product09.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart">
-                                                        <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product10.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product01.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart">
-                                                        <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product02.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product03.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product04.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product05.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product06.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart">
-                                                        <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-
-                                    <!--=======  single tab slider item  =======-->
-                                    <div class="single-tab-slider-item">
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product07.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-
-                                        <!--=======  tab slider sub product  =======-->
-
-                                        <div class="gf-product tab-slider-sub-product">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product08.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                                <div class="product-hover-icons">
-                                                    <a href="#" data-tooltip="Add to cart"> <span
-                                                            class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                        data-target="#quick-view-modal-container"> <span
-                                                            class="icon_search"></span> </a>
-                                                </div>
-                                            </div>
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!--=======  End of tab slider sub product  =======-->
-                                    </div>
-                                    <!--=======  End of single tab slider product  =======-->
-                                </div>
-
-                                <!--=======  End of tab slider container  =======-->
-                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                @endif
+            @endforeach
+
         </div>
-    </div>
+    </section>
 
 
-    <!--=====  End of Tab slider  ======-->
-
-    <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    =            Featured product image gallery         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    =============================================-->
-
-    <div class="featured-product-image-gallery mb-80 pt-120 section-bg">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  gallery product container  =======-->
-                    <div class="gallery-product-container">
-                        <div class="row no-gutters">
-                            <div class="col-lg-4 col-sm-6">
-                                <!--=======  single featured product  =======-->
-
-                                <div class="single-featured-product">
-                                    <a href="single-product.html">
-                                        <img src="assets/images/product-banners/fullbanner-1.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-
-                                <!--=======  End of single featured product  =======-->
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <!--=======  single featured product  =======-->
-
-                                <div class="single-featured-product">
-                                    <a href="single-product.html">
-                                        <img src="assets/images/product-banners/fullbanner-2.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-
-                                <!--=======  End of single featured product  =======-->
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <!--=======  single featured product  =======-->
-
-                                <div class="single-featured-product">
-                                    <a href="single-product.html">
-                                        <img src="assets/images/product-banners/fullbanner-3.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-
-                                <!--=======  End of single featured product  =======-->
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <!--=======  single featured product  =======-->
-
-                                <div class="single-featured-product">
-                                    <a href="single-product.html">
-                                        <img src="assets/images/product-banners/fullbanner-4.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-
-                                <!--=======  End of single featured product  =======-->
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <!--=======  single featured product  =======-->
-
-                                <div class="single-featured-product">
-                                    <a href="single-product.html">
-                                        <img src="assets/images/product-banners/fullbanner-5.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-
-                                <!--=======  End of single featured product  =======-->
-                            </div>
-                            <div class="col-lg-4 col-sm-6">
-                                <!--=======  single featured product  =======-->
-
-                                <div class="single-featured-product">
-                                    <a href="single-product.html">
-                                        <img src="assets/images/product-banners/fullbanner-6.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-
-                                <!--=======  End of single featured product  =======-->
-                            </div>
-                        </div>
-                    </div>
-
-                    <!--=======  End of gallery product container  =======-->
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--=====  End of Featured product image gallery  ======-->
-
-    <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =            Sale product slider         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =============================================-->
 
     <div class="sale-single-product-section mb-35">
         <div class="container">
@@ -1588,144 +230,96 @@
                     <div class="sale-single-product-container">
                         <!--=======  sale single product  =======-->
 
-                        <div class="sale-single-product">
-                            <div class="product-countdown" data-countdown="2020/05/01"></div>
-                            <div class="row">
-                                <div class="col-lg-4 offset-lg-2 col-md-12">
-                                    <!--=======  sale single product image  =======-->
+                        @foreach ($products as $product)
+                            @if ($product->discount != null && $product->discount >= Carbon\Carbon::now())
+                                <div class="sale-single-product">
+                                    <div class="product-countdown">
+                                        <div class="single-countdown"><span
+                                                class="days{{ $product->id }} single-countdown-time"></span><span
+                                                class="single-countdown-text">Days</span></div>
+                                        <div class="single-countdown"><span
+                                                class="hours{{ $product->id }} single-countdown-time"></span><span
+                                                class="single-countdown-text">Hours</span></div>
+                                        <div class="single-countdown"><span
+                                                class="minutes{{ $product->id }} single-countdown-time"></span><span
+                                                class="single-countdown-text">Mins</span></div>
+                                        <div class="single-countdown"><span
+                                                class="seconds{{ $product->id }} single-countdown-time"></span><span
+                                                class="single-countdown-text">Secs</span></div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 offset-lg-2 col-md-12">
+                                            <!--=======  sale single product image  =======-->
 
-                                    <div class="image text-md-center">
-                                        <a href="single-product.html">
-                                            <span class="onsale">Sale!</span>
-                                            <img src="assets/images/products/product01.jpg" class="img-fluid"
-                                                alt="">
-                                        </a>
-                                        <div class="product-hover-icons">
-                                            <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                data-target="#quick-view-modal-container"> <span
-                                                    class="icon_search"></span> </a>
+                                            <div class="image text-md-center">
+                                                <a href="single-product.html">
+                                                    <span class="onsale">Sale!</span>
+                                                    <img src="{{ $product->getImage() }}" class="img-fluid"
+                                                        style="width: 325px; height: 270px; object-fit: contain"
+                                                        alt="">
+                                                </a>
+                                                <div class="product-hover-icons">
+                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
+                                                        data-target="#quick-view-modal-container"> <span
+                                                            class="icon_search"></span> </a>
+                                                </div>
+                                            </div>
+
+                                            <!--=======  End of sale single product image  =======-->
+                                        </div>
+                                        <div class="col-lg-6 col-md-12">
+                                            <!--=======  sale single product content  =======-->
+
+                                            <div class="sale-single-product-content text-center">
+                                                <h2 class="product-title"><a
+                                                        href="single-product.html">{{ $product->name_ru }}</a></h2>
+                                                <h2 class="price">
+                                                    @if ($product->price < $product->old_price)
+                                                        <span class="main-price">{{ $product->old_price }} сум</span>
+                                                    @endif
+                                                    <span class="discounted-price">{{ $product->price }} сум</span>
+                                                </h2>
+                                                <p class="product-description">{{ $product->description_ru }}</p>
+                                                <a href="#" class="single-sale-add-to-cart-btn">add to cart</a>
+                                            </div>
+
+                                            <!--=======  End of sale single product content  =======-->
                                         </div>
                                     </div>
+                                    <script>
+                                        let days{{ $product->id }} = document.querySelector('.days{{ $product->id }}'),
+                                            hours{{ $product->id }} = document.querySelector('.hours{{ $product->id }}'),
+                                            minutes{{ $product->id }} = document.querySelector('.minutes{{ $product->id }}'),
+                                            seconds{{ $product->id }} = document.querySelector('.seconds{{ $product->id }}'),
+                                            //Count Down End Date
+                                            //1000 milliseconds = 1 second
+                                            countDownDate{{ $product->id }} = new Date("{{ $product->discount->format('M d, Y H:i:s') }}").getTime();
 
-                                    <!--=======  End of sale single product image  =======-->
+                                        let counter{{ $product->id }} = setInterval(() => {
+                                            //Get Date Now
+                                            let dateNow = new Date().getTime();
+                                            //Find The Date Difference Between Now and End Date
+                                            let dateDiff{{ $product->id }} = countDownDate{{ $product->id }} - dateNow;
+
+                                            //Get Time Unit
+                                            let day = Math.floor(dateDiff{{ $product->id }} / (1000 * 60 * 60 * 24));
+                                            let hour = Math.floor((dateDiff{{ $product->id }} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                                            let minute = Math.floor((dateDiff{{ $product->id }} % (1000 * 60 * 60)) / (1000 * 60));
+                                            let second = Math.floor((dateDiff{{ $product->id }} % (1000 * 60)) / 1000);
+
+                                            days{{ $product->id }}.innerHTML = day < 10 ? `0${day}` : day;
+                                            hours{{ $product->id }}.innerHTML = hour < 10 ? `0${hour}` : hour;
+                                            minutes{{ $product->id }}.innerHTML = minute < 10 ? `0${minute}` : minute;
+                                            seconds{{ $product->id }}.innerHTML = second < 10 ? `0${second}` : second;
+
+                                            if (dateDiff{{ $product->id }} == 0) {
+                                                clearInterval(counter{{ $product->id }});
+                                            }
+                                        }, 1000);
+                                    </script>
                                 </div>
-                                <div class="col-lg-6 col-md-12">
-                                    <!--=======  sale single product content  =======-->
-
-                                    <div class="sale-single-product-content text-center">
-                                        <h2 class="product-title"><a href="single-product.html">Dolorum fuga eget
-                                                posuere</a></h2>
-                                        <h2 class="price"> <span class="main-price">$15.09</span> <span
-                                                class="discounted-price">$12.00</span></h2>
-                                        <p class="product-description">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut
-                                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                            exercitation ullamco,Proin
-                                            lectus ipsum, gravida et mattis vulputate, tristique ut lectus
-                                        </p>
-                                        <a href="#" class="single-sale-add-to-cart-btn">add to cart</a>
-                                    </div>
-
-                                    <!--=======  End of sale single product content  =======-->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--=======  End of sale single product  =======-->
-                        <!--=======  sale single product  =======-->
-
-                        <div class="sale-single-product">
-                            <div class="product-countdown" data-countdown="2020/05/01"></div>
-                            <div class="row">
-                                <div class="col-lg-4 offset-lg-2">
-                                    <!--=======  sale single product image  =======-->
-
-                                    <div class="image">
-                                        <a href="single-product.html">
-                                            <span class="onsale">Sale!</span>
-                                            <img src="assets/images/products/product02.jpg" class="img-fluid"
-                                                alt="">
-                                        </a>
-                                        <div class="product-hover-icons">
-                                            <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                data-target="#quick-view-modal-container"> <span
-                                                    class="icon_search"></span> </a>
-                                        </div>
-                                    </div>
-
-                                    <!--=======  End of sale single product image  =======-->
-                                </div>
-                                <div class="col-lg-6">
-                                    <!--=======  sale single product content  =======-->
-
-                                    <div class="sale-single-product-content text-center">
-                                        <h2 class="product-title"><a href="single-product.html">Dolorum fuga eget
-                                                posuere</a></h2>
-                                        <h2 class="price"> <span class="main-price">$15.09</span> <span
-                                                class="discounted-price">$12.00</span></h2>
-                                        <p class="product-description">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut
-                                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                            exercitation ullamco,Proin
-                                            lectus ipsum, gravida et mattis vulputate, tristique ut lectus
-                                        </p>
-                                        <a href="#" class="single-sale-add-to-cart-btn">add to cart</a>
-                                    </div>
-
-                                    <!--=======  End of sale single product content  =======-->
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--=======  End of sale single product  =======-->
-                        <!--=======  sale single product  =======-->
-
-                        <div class="sale-single-product">
-                            <div class="product-countdown" data-countdown="2020/05/01"></div>
-                            <div class="row">
-                                <div class="col-lg-4 offset-lg-2">
-                                    <!--=======  sale single product image  =======-->
-
-                                    <div class="image">
-                                        <a href="single-product.html">
-                                            <span class="onsale">Sale!</span>
-                                            <img src="assets/images/products/product03.jpg" class="img-fluid"
-                                                alt="">
-                                        </a>
-                                        <div class="product-hover-icons">
-                                            <a href="#" data-tooltip="Quick view" data-toggle="modal"
-                                                data-target="#quick-view-modal-container"> <span
-                                                    class="icon_search"></span> </a>
-                                        </div>
-                                    </div>
-
-                                    <!--=======  End of sale single product image  =======-->
-                                </div>
-                                <div class="col-lg-6">
-                                    <!--=======  sale single product content  =======-->
-
-                                    <div class="sale-single-product-content text-center">
-                                        <h2 class="product-title"><a href="single-product.html">Dolorum fuga eget
-                                                posuere</a></h2>
-                                        <h2 class="price"> <span class="main-price">$15.09</span> <span
-                                                class="discounted-price">$12.00</span></h2>
-                                        <p class="product-description">
-                                            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                            tempor incididunt ut
-                                            labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                                            exercitation ullamco,Proin
-                                            lectus ipsum, gravida et mattis vulputate, tristique ut lectus
-                                        </p>
-                                        <a href="#" class="single-sale-add-to-cart-btn">add to cart</a>
-                                    </div>
-
-                                    <!--=======  End of sale single product content  =======-->
-                                </div>
-                            </div>
-                        </div>
-
+                            @endif
+                        @endforeach
                         <!--=======  End of sale single product  =======-->
                     </div>
 
@@ -1734,622 +328,6 @@
             </div>
         </div>
     </div>
-
-    <!--=====  End of Sale product slider  ======-->
-
-    <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    =            Best seller slider         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    =============================================-->
-
-    <div class="slider best-seller-slider mb-35">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  category slider section title  =======-->
-
-                    <div class="section-title">
-                        <h3>best seller</h3>
-                    </div>
-
-                    <!--=======  End of category slider section title  =======-->
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  best seller slider container  =======-->
-
-                    <div class="best-seller-slider-container pt-15 pb-15">
-
-                        <!--=======  single best seller product  =======-->
-                        <div class="col">
-                            <div class="single-best-seller-item">
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product01.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product02.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Officiis
-                                                        debitis varius risus</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--=======  End of single best seller product  =======-->
-
-                        <!--=======  single best seller product  =======-->
-                        <div class="col">
-                            <div class="single-best-seller-item">
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product03.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Phasellus
-                                                        vel hendrerit eget</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product04.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Ornare sed
-                                                        consequat nisl eget</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--=======  End of single best seller product  =======-->
-
-                        <!--=======  single best seller product  =======-->
-                        <div class="col">
-                            <div class="single-best-seller-item">
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product05.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product06.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Ornare sed
-                                                        consequat nisl eget</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--=======  End of single best seller product  =======-->
-
-                        <!--=======  single best seller product  =======-->
-                        <div class="col">
-                            <div class="single-best-seller-item">
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product07.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product08.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Ornare sed
-                                                        consequat nisl eget</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--=======  End of single best seller product  =======-->
-
-                        <!--=======  single best seller product  =======-->
-                        <div class="col">
-                            <div class="single-best-seller-item">
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product09.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product10.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Ornare sed
-                                                        consequat nisl eget</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--=======  End of single best seller product  =======-->
-
-                        <!--=======  single best seller product  =======-->
-                        <div class="col">
-                            <div class="single-best-seller-item">
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product11.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor
-                                                        ehicula non commodo</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="best-seller-sub-product">
-                                    <div class="row">
-                                        <div class="col-lg-4 pl-0 pr-0">
-                                            <div class="image">
-                                                <a href="single-product.html">
-                                                    <img src="assets/images/products/product12.jpg" class="img-fluid"
-                                                        alt="">
-                                                </a>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-8 pl-0 pr-0">
-                                            <div class="product-content">
-                                                <div class="product-categories">
-                                                    <a href="shop-left-sidebar.html">Fast Foods</a>,
-                                                    <a href="shop-left-sidebar.html">Vegetables</a>
-                                                </div>
-                                                <h3 class="product-title"><a href="single-product.html">Ornare sed
-                                                        consequat nisl eget</a></h3>
-                                                <div class="price-box">
-                                                    <span class="main-price">$89.00</span>
-                                                    <span class="discounted-price">$80.00</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--=======  End of single best seller product  =======-->
-
-                    </div>
-
-                    <!--=======  End of best seller slider container  =======-->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--=====  End of Best seller slider  ======-->
-
-    <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =            Blog post slider container         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =============================================-->
-
-    <div class="slider blog-slider mb-35">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  blog slider section title  =======-->
-
-                    <div class="section-title">
-                        <h3>greenfarm news</h3>
-                    </div>
-
-                    <!--=======  End of blog slider section title  =======-->
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  blog slide container  =======-->
-
-                    <div class="blog-slider-container pt-30 pb-30 pr-30 pl-30">
-
-                        <!--=======  single blog post  =======-->
-                        <div class="col">
-                            <div class="single-post-wrapper">
-                                <div class="post-thumb">
-                                    <a href="blog-post-image-format.html">
-                                        <img src="assets/images/blog-image/blog01.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="post-info">
-                                    <div class="post-meta">
-                                        <div class="post-date">29.09.2019</div>
-                                    </div>
-                                    <h3 class="post-title"><a href="blog-post-image-format.html">Blog image post</a>
-                                    </h3>
-                                    <a href="blog-post-image-format.html" class="readmore-btn">continue <i
-                                            class="fa fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single blog post  =======-->
-
-                        <!--=======  single blog post  =======-->
-                        <div class="col">
-                            <div class="single-post-wrapper">
-                                <div class="post-thumb">
-                                    <a href="blog-post-image-gallery.html">
-                                        <img src="assets/images/blog-image/blog02.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="post-info">
-                                    <div class="post-meta">
-                                        <div class="post-date">29.09.2019</div>
-                                    </div>
-                                    <h3 class="post-title"><a href="blog-post-image-gallery.html">Post with
-                                            gallery</a></h3>
-                                    <a href="blog-post-image-gallery.html" class="readmore-btn">continue <i
-                                            class="fa fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single blog post  =======-->
-
-                        <!--=======  single blog post  =======-->
-                        <div class="col">
-                            <div class="single-post-wrapper">
-                                <div class="post-thumb">
-                                    <a href="blog-post-audio-format.html">
-                                        <img src="assets/images/blog-image/blog03.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="post-info">
-                                    <div class="post-meta">
-                                        <div class="post-date">29.09.2019</div>
-                                    </div>
-                                    <h3 class="post-title"><a href="blog-post-audio-format.html">Blog with audio</a>
-                                    </h3>
-                                    <a href="blog-post-audio-format.html" class="readmore-btn">continue <i
-                                            class="fa fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single blog post  =======-->
-
-                        <!--=======  single blog post  =======-->
-                        <div class="col">
-                            <div class="single-post-wrapper">
-                                <div class="post-thumb">
-                                    <a href="blog-post-video-format.html">
-                                        <img src="assets/images/blog-image/blog04.jpg" class="img-fluid"
-                                            alt="">
-                                    </a>
-                                </div>
-                                <div class="post-info">
-                                    <div class="post-meta">
-                                        <div class="post-date">29.09.2019</div>
-                                    </div>
-                                    <h3 class="post-title"><a href="blog-post-video-format.html">Blog with video</a>
-                                    </h3>
-                                    <a href="blog-post-video-format.html" class="readmore-btn">continue <i
-                                            class="fa fa-arrow-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single blog post  =======-->
-
-                    </div>
-
-                    <!--=======  End of blog slide container  =======-->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--=====  End of Blog post slider  ======-->
-
-
-    <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                =            Brand logo slider         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                =============================================-->
-
-    <div class="slider brand-logo-slider mb-35">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  blog slider section title  =======-->
-
-                    <div class="section-title">
-                        <h3>brand logos</h3>
-                    </div>
-
-                    <!--=======  End of blog slider section title  =======-->
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  brand logo wrapper  =======-->
-
-                    <div class="brand-logo-wrapper pt-20 pb-20">
-
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand1.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand2.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand3.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand4.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand5.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand6.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                    </div>
-
-                    <!--=======  End of brand logo wrapper  =======-->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--=====  End of Brand logo slider  ======-->
 @endsection
 
 
@@ -2358,10 +336,6 @@
 
 
 @section('function-modal')
-    <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    =            Quick view modal         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    =============================================-->
-
     <div class="modal fade quick-view-modal-container" id="quick-view-modal-container" tabindex="-1" role="dialog"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
@@ -2479,8 +453,8 @@
                                         </li>
                                         <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a>
                                         </li>
-                                        <li><a class="google-plus" href="#"><i
-                                                    class="fa fa-google-plus"></i></a></li>
+                                        <li><a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a>
+                                        </li>
                                         <li><a class="pinterest" href="#"><i class="fa fa-pinterest"></i></a>
                                         </li>
                                     </ul>

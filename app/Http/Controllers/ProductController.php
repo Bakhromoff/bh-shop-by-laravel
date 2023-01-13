@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('admin.products.index');
+        $products = Product::paginate(10);
+        return view('admin.products.index', compact('products'));
     }
 
     /**
@@ -24,7 +26,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('admin.products.create', compact('categories'));
     }
 
     /**
@@ -35,7 +38,35 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_ru' => 'required|max:30',
+            'name_uz' => 'required|max:30',
+            'description_ru' => 'required',
+            'description_uz' => 'required',
+            'price' => 'required',
+            'category_id' => 'required|numeric',
+            'image' => 'required|mimes:jpg,png,jpeg,svg|max:4096',
+        ]);
+            $product = new Product;
+            $product->name_ru = $request->name_ru;
+            $product->name_uz = $request->name_uz;
+            $product->description_ru = $request->description_ru;
+            $product->description_uz = $request->description_uz;
+            $product->price = $request->price;
+            $product->category_id = $request->category_id;
+            if($request->has('sale')) {
+                $product->isSale = 1;
+            } else {
+                $product->isSale = 0;
+            }
+            if($request->has('discount')) {
+                $product->discount = $request->discount;
+            }
+            $image = md5(microtime().rand(1,999)).'.'.$request->file('image')->extension();
+            $request->file('image')->storeAs('public/product_images/', $image);
+            $product->image = $image;
+            $product->save();
+            return redirect()->route('products.index');
     }
 
     /**
@@ -57,7 +88,8 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $categories = Category::all();
+        return view('admin.products.edit', compact('categories', 'product'));
     }
 
     /**
@@ -69,7 +101,45 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'name_ru' => 'required|max:30',
+            'name_uz' => 'required|max:30',
+            'description_ru' => 'required',
+            'description_uz' => 'required',
+            'price' => 'required',
+            'category_id' => 'required|numeric',
+            $request->has('image') ? "'image' => 'required|mimes:jpg,png,jpeg,svg|max:4096'," : ""
+        ]);
+            if($product->price != $request->price) {
+                $product->old_price = $product->price;
+            }
+            $product->name_ru = $request->name_ru;
+            $product->name_uz = $request->name_uz;
+            $product->description_ru = $request->description_ru;
+            $product->description_uz = $request->description_uz;
+            $product->price = $request->price;
+            $product->category_id = $request->category_id;
+            if($request->has('sale')) {
+                $product->isSale = 1;
+            } else {
+                $product->isSale = 0;
+            }
+            if($request->has('discount')) {
+                $product->discount = $request->discount;
+            }
+            if($request->has('image')) {
+                $image = md5(microtime().rand(1,999)).'.'.$request->file('image')->extension();
+            $request->file('image')->storeAs('public/product_images/', $image);
+            if($request->file('image')->storeAs('public/product_images/', $image)) {
+                if(file_exists('storage/product_images/'.$product->image)) {
+                    unlink('storage/product_images/'.$product->image);
+                }
+            }
+            $product->image = $image;
+            }
+
+            $product->save();
+            return redirect()->route('products.index');
     }
 
     /**
@@ -80,6 +150,11 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        if(file_exists('storage/product_images/'.$product->image)) {
+            unlink('storage/product_images/'.$product->image);
+        }
+        return redirect()->back();
+
     }
 }

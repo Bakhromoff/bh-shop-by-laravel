@@ -23,7 +23,7 @@ class AdminMiddleware
         return redirect()->back();
     }
     } else {
-        return redirect('/');
+        return redirect('/login');
     }
     }
 }

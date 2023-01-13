@@ -13,15 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('wishlists', function (Blueprint $table) {
             $table->id();
-            $table->string('name_ru');
-            $table->string('name_uz');
-            $table->string('image');
-            $table->string('status')->default('active');
-            $table->string('emoji');
-            $table->integer('head_category_id');
-            $table->boolean('isTop')->default(0);
             $table->timestamps();
         });
     }
@@ -33,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('wishlists');
     }
 };

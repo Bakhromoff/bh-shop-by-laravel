@@ -68,6 +68,19 @@
                                     <input type="text" name="emoji" class="form-control"
                                         value="{{ old('name', $category->emoji) }}">
                                 </div>
+                                <div class="form-group" id="photo">
+                                    <label>Изображение (Optional)</label>
+                                    <img class="img img-thumbnail" src="{{ $category->getImage() }}" alt=""
+                                        width="100">
+                                    <input style="border: 0px; padding-left: 0px" type="file" name="image"
+                                        class="form-control" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="top">Top</label>
+                                    <input type="checkbox" name="top" {{ $category->isTop ? 'checked' : '' }}
+                                        id="top">
+                                </div>
+
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-success float-right">Сохранить</button>
                                     <a href="" class="btn btn-default float-left">Отменить</a>

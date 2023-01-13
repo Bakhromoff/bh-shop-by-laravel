@@ -3,52 +3,6 @@
  =============================================-->
 
 <footer>
-    <!--=======  newsletter section  =======-->
-
-    <div class="newsletter-section pt-50 pb-50">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4 col-md-12 col-sm-12 mb-sm-20 mb-xs-20">
-                    <!--=======  newsletter title =======-->
-
-                    <div class="newsletter-title">
-                        <h1>
-                            <img src="assets/images/icon-newsletter.png" alt="">
-                            Send Newsletter
-                        </h1>
-                    </div>
-
-                    <!--=======  End of newsletter title  =======-->
-                </div>
-
-                <div class="col-lg-8 col-md-12 col-sm-12">
-                    <!--=======  subscription-form wrapper  =======-->
-
-                    <div class="subscription-form-wrapper d-flex flex-wrap flex-sm-nowrap">
-                        <p class="mb-xs-20">Sign up for our newsletter to get up-to-date from us</p>
-                        <div class="subscription-form">
-                            <form id="mc-form" class="mc-form subscribe-form">
-                                <input type="email" id="mc-email" autocomplete="off"
-                                    placeholder="Your email address">
-                                <button id="mc-submit" type="submit"> subscribe!</button>
-                            </form>
-
-                            <!-- mailchimp-alerts Start -->
-                            <div class="mailchimp-alerts">
-                                <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
-                                <div class="mailchimp-success"></div><!-- mailchimp-success end -->
-                                <div class="mailchimp-error"></div><!-- mailchimp-error end -->
-                            </div><!-- mailchimp-alerts end -->
-                        </div>
-                    </div>
-
-                    <!--=======  End of subscription-form wrapper  =======-->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--=======  End of newsletter section  =======-->
 
     <!--=======  social contact section  =======-->
 
@@ -59,7 +13,7 @@
                     <!--=======  social media links  =======-->
 
                     <div class="social-media-section">
-                        <h2>Follow us</h2>
+                        <h2>Bizni kuzatib boring</h2>
                         <div class="social-links">
                             <a class="facebook" href="http://www.facebook.com" data-tooltip="Facebook"><i
                                     class="fa fa-facebook"></i></a>
@@ -80,7 +34,7 @@
                     <!--=======  contact summery  =======-->
 
                     <div class="contact-summery">
-                        <h2>Contact us</h2>
+                        <h2>Bog'lanish</h2>
 
                         <!--=======  contact segments  =======-->
 
@@ -92,7 +46,7 @@
                                     <span class="icon_pin_alt"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Address: <span>123 New Design Str, Melbourne, Australia</span></p>
+                                    <p>Manzil: <span>Farg'ona tumani Yangiavlod ko'cha 109</span></p>
                                 </div>
                             </div>
 
@@ -104,7 +58,7 @@
                                     <span class="icon_mobile"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Phone: <span>1-888-123-456-89</span></p>
+                                    <p>Tel: <span>+998913979007</span></p>
                                 </div>
                             </div>
 
@@ -116,7 +70,7 @@
                                     <span class="icon_mail_alt"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Email: <span>support@hastech.company</span></p>
+                                    <p>Email: <span>hotamtoy9007@gmail.com</span></p>
                                 </div>
                             </div>
 
