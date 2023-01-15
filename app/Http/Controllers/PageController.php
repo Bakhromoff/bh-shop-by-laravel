@@ -25,7 +25,7 @@ class PageController extends Controller
     public function admin() {
         return redirect()->route('categories.index');
     }
-    public function wishlist() {
+    public function wishes() {
         return view('wishlist');
     }
 }

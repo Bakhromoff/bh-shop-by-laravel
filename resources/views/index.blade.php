@@ -7,10 +7,21 @@
 
 
 @section('content')
-    <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            =            Hero slider Area         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            =============================================-->
+    @if ($errors->any())
+        <div class="alert alert-success" role="alert" style="position: fixed; top: 50px; left: 20px; z-index: 1000000;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            {{ $errors->first() }}
+        </div>
 
+        <script>
+            window.setTimeout(function() {
+                $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+            }, 4000);
+        </script>
+    @endif
     <div class="hero-slider-container mb-35">
         <!--=======  Slider area  =======-->
 
@@ -30,24 +41,12 @@
             @endforeach
 
 
-            <!--=======  End of hero slider item  =======-->
-
-
-            <!--=======  End of Hero slider item  =======-->
-
         </div>
 
         <!--=======  End of Slider area  =======-->
 
     </div>
 
-    <!--=====  End of Hero slider Area  ======-->
-
-
-
-    <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                =            Policy area         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                =============================================-->
 
     <div class="policy-section mb-35">
         <div class="container">
@@ -71,11 +70,6 @@
                             <p>30 -DAY RETURNS MONEY BACK</p>
                         </div>
 
-                        <!--=======  End of single policy  =======-->
-
-                        <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =            single policy         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =============================================-->
 
                         <div class="single-policy">
                             <span><img src="assets/images/policy-icon3.png" class="img-fluid" alt=""></span>
@@ -89,12 +83,6 @@
             </div>
         </div>
     </div>
-
-    <!--=====  End of Policy area  ======-->
-
-    <!--=============================================
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =            category slider         =
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        =============================================-->
 
     <div class="slider category-slider mb-35">
         <div class="container">
@@ -170,14 +158,22 @@
                                                         style="width: 325px; height: 270px; object-fit: contain"
                                                         alt="">
                                                 </a>
-                                                <div class="product-hover-icons">
-                                                    <a class="active" href="#" data-tooltip="Add to cart"
-                                                        tabindex="0">
-                                                        <span class="icon_cart_alt"></span></a>
-                                                    <a href="#" data-tooltip="Add to wishlist" tabindex="0"> <span
-                                                            class="icon_heart_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Compare" tabindex="0"> <span
-                                                            class="arrow_left-right_alt"></span> </a>
+                                                <div class="product-hover-icons d-flex">
+                                                    <form class="d-flex" action="{{ route('cards.store', $product->id) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        <button class="product-button" data-tooltip="Add to cart"
+                                                            type="submit"><span class="icon_cart_alt"></span></button>
+
+                                                    </form>
+                                                    <form class="d-flex" method="POST"
+                                                        action="{{ route('wishes.store', $product->id) }}">
+                                                        @csrf
+                                                        <button class="product-button" data-tooltip="Add to wishlist"
+                                                            type="submit"><span
+                                                                class="icon_heart_alt"></span></span></button>
+                                                    </form>
+
                                                     <a href="#" data-tooltip="Quick view" data-toggle="modal"
                                                         data-target="#quick-view-modal-container" tabindex="0"> <span
                                                             class="icon_search"></span> </a>
@@ -194,7 +190,7 @@
                                                     @if ($product->price < $product->old_price)
                                                         <span class="main-price">{{ $product->old_price }} сум</span>
                                                     @endif
-                                                    <span class="discounted-price">{{ $product->price }}</span>
+                                                    <span class="discounted-price">{{ $product->price }} сум</span>
                                                 </div>
                                             </div>
 

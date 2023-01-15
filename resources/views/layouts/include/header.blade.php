@@ -62,7 +62,18 @@
             color: #fff;
         }
 
-        .slider-bg {}
+        .product-button {
+            border: 0;
+            color: #fff;
+            background-color: #80bb01;
+            width: 43px;
+            height: 43px;
+            border-radius: 50%;
+        }
+
+        .product-button:hover {
+            background-color: #5d8801;
+        }
     </style>
 
 </head>
@@ -95,7 +106,7 @@
                                         <li><a href="/language/ru" class="blackcolor ">RU</a></li>
                                         @if (Route::has('login'))
                                             @auth
-                                                <li><a href="{{ route('wishlist') }}">Saralangan</a></li>
+                                                <li><a href="{{ route('wishes.index') }}">Saralangan</a></li>
                                                 <li><a class="blackcolor d-flex" href="{{ route('account') }}"><i
                                                             class="material-icons opacity-10">account_circle</i>{{ Auth::user()->name }}</a>
                                                 </li>
