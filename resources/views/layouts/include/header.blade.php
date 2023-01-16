@@ -14,6 +14,7 @@
     <!-- Favicon -->
     <link rel="icon" href="assets/images/favicon.ico">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
 
     <!-- CSS
  ============================================ -->
@@ -73,6 +74,31 @@
 
         .product-button:hover {
             background-color: #5d8801;
+        }
+
+        .modal-card-button {
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            display: inline-block;
+            font-size: 14px;
+            font-weight: 500;
+            height: 45px;
+            line-height: 43px;
+            min-width: 130px;
+            padding: 0 15px;
+            text-align: center;
+            text-transform: none;
+        }
+
+        .modal-card-button:hover {
+            background-color: #80bb01;
+            border-color: #80bb01;
+            color: #fff;
+        }
+
+        .cart-delete:hover {
+            color: #80bb01;
         }
     </style>
 
@@ -167,66 +193,162 @@
                             </div>
                             <!-- end of search bar -->
                             <!-- shopping cart -->
-                            <div class="shopping-cart" id="shopping-cart">
-                                <a href="cart.html">
-                                    <div class="cart-icon d-inline-block">
-                                        <span class="icon_bag_alt"></span>
-                                    </div>
-                                    <div class="cart-info d-inline-block">
-                                        <p>Shopping Cart
-                                            <span>
-                                                0 items - $0.00
-                                            </span>
-                                        </p>
-                                    </div>
-                                </a>
-                                <!-- end of shopping cart -->
+                            @if (\Auth::user())
+                                <?
+                                $cards = App\Models\Card::where('user_id', \Auth::user()->id);
+                                $products = App\Models\Product::all();
 
-                                <!-- cart floating box -->
-                                <div class="cart-floating-box" id="cart-floating-box">
-                                    <div class="cart-items">
-                                        <div class="cart-float-single-item d-flex">
-                                            <span class="remove-item"><a href="#"><i
-                                                        class="fa fa-times"></i></a></span>
-                                            <div class="cart-float-single-item-image">
-                                                <a href="single-product.html"><img
-                                                        src="assets/images/products/product01.jpg" class="img-fluid"
-                                                        alt=""></a>
-                                            </div>
-                                            <div class="cart-float-single-item-desc">
-                                                <p class="product-title"> <a href="single-product.html">Duis pulvinar
-                                                        obortis eleifend </a></p>
-                                                <p class="price"><span class="count">1x</span> $20.50</p>
-                                            </div>
+                            ?>
+                                <!-- shopping cart -->
+                                <div class="shopping-cart" id="shopping-cart">
+                                    <a href="{{ route('cart') }}">
+                                        <div class="cart-icon d-inline-block">
+                                            <span class="icon_bag_alt"></span>
                                         </div>
-                                        <div class="cart-float-single-item d-flex">
-                                            <span class="remove-item"><a href="#"><i
-                                                        class="fa fa-times"></i></a></span>
-                                            <div class="cart-float-single-item-image">
-                                                <a href="single-product.html"><img
-                                                        src="assets/images/products/product02.jpg" class="img-fluid"
-                                                        alt=""></a>
+                                        <div class="cart-info d-inline-block">
+
+                                            <p>Shopping Cart
+                                                <?
+                                                $sum = 0;
+                                                ?>
+                                                @forelse ($products as $product)
+                                                    @if (in_array(
+                                                        $product->id,
+                                                        \Auth::user()->cards->pluck('product_id')->toArray()))
+                                                        <?
+                                                        $card_product_count = \App\Models\Card::where('product_id', $product->id)->count();
+                                                        $sum = $sum + $card_product_count*$product->price;
+                                                        ?>
+                                                    @endif
+                                                @empty
+                                                    <p class="text-sm alert alert-dark">No data</p>
+                                                @endforelse
+                                                <span>
+                                                    {{ $cards->sum('count') }}items - {{ $sum }} sum
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <!-- end of shopping cart -->
+
+                                    <!-- cart floating box -->
+                                    <div class="cart-floating-box" id="cart-floating-box">
+                                        <div class="cart-items">
+                                            <?
+                                            $sum = 0;
+                                            ?>
+                                            @forelse ($products as $product)
+                                                @if (in_array(
+                                                    $product->id,
+                                                    \Auth::user()->cards->pluck('product_id')->toArray()))
+                                                    <?
+                                                    $card_product_count = \App\Models\Card::where('product_id', $product->id)->count();
+                                                    $sum = $sum + $card_product_count*$product->price;
+                                                    ?>
+                                                    <div class="cart-float-single-item d-flex">
+                                                        <span class="remove-item">
+                                                            <form action="{{ route('cards.delete', $product->id) }}"
+                                                                method="POST">
+                                                                @csrf
+                                                                <button class="btn btn-default cart-delete"
+                                                                    type="submit"><i class="fa fa-times"></i></button>
+                                                            </form>
+                                                        </span>
+                                                        <div class="cart-float-single-item-image">
+                                                            <a href="single-product.html"><img
+                                                                    src="{{ $product->getImage() }}" class="img-fluid"
+                                                                    style="max-height: 100px;" alt=""></a>
+                                                        </div>
+                                                        <div class="cart-float-single-item-desc">
+                                                            <p class="product-title"> <a
+                                                                    href="single-product.html">{{ $product->name_uz }}</a>
+                                                            </p>
+                                                            <p class="price"><span
+                                                                    class="count">{{ $card_product_count }}x</span>
+                                                                {{ $product->price }} sum</p>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @empty
+                                            @endforelse
+
+
+                                        </div>
+                                        <div class="cart-calculation">
+                                            <div class="calculation-details">
+                                                <p class="total">Subtotal <span>{{ $sum }} sum</span></p>
                                             </div>
-                                            <div class="cart-float-single-item-desc">
-                                                <p class="product-title"> <a href="single-product.html">Fusce
-                                                        ultricies
-                                                        dolor vitae</a></p>
-                                                <p class="price"><span class="count">1x</span> $20.50</p>
+                                            <div class="floating-cart-btn text-center">
+                                                <a href="">Checkout</a>
+                                                <a href="cart.html">View Cart</a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="cart-calculation">
-                                        <div class="calculation-details">
-                                            <p class="total">Subtotal <span>$22</span></p>
-                                        </div>
-                                        <div class="floating-cart-btn text-center">
-                                            <a href="checkout.html">Checkout</a>
-                                            <a href="cart.html">View Cart</a>
-                                        </div>
-                                    </div>
+                                    <!-- end of cart floating box -->
                                 </div>
-                                <!-- end of cart floating box -->
-                            </div>
+                            @else
+                                <div class="shopping-cart" id="shopping-cart">
+                                    <a href="cart.html">
+                                        <div class="cart-icon d-inline-block">
+                                            <span class="icon_bag_alt"></span>
+                                        </div>
+                                        <div class="cart-info d-inline-block">
+                                            <p>Shopping Cart
+                                                <span>
+                                                    0 items - $0.00
+                                                </span>
+                                            </p>
+                                        </div>
+                                    </a>
+                                    <!-- end of shopping cart -->
+
+                                    <!-- cart floating box -->
+                                    <div class="cart-floating-box" id="cart-floating-box">
+                                        <div class="cart-items">
+                                            <div class="cart-float-single-item d-flex">
+                                                <span class="remove-item"><a href="#"><i
+                                                            class="fa fa-times"></i></a></span>
+                                                <div class="cart-float-single-item-image">
+                                                    <a href="single-product.html"><img
+                                                            src="assets/images/products/product01.jpg"
+                                                            class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="cart-float-single-item-desc">
+                                                    <p class="product-title"> <a href="single-product.html">Duis
+                                                            pulvinar
+                                                            obortis eleifend </a></p>
+                                                    <p class="price"><span class="count">1x</span> $20.50</p>
+                                                </div>
+                                            </div>
+                                            <div class="cart-float-single-item d-flex">
+                                                <span class="remove-item"><a href="#"><i
+                                                            class="fa fa-times"></i></a></span>
+                                                <div class="cart-float-single-item-image">
+                                                    <a href="single-product.html"><img
+                                                            src="assets/images/products/product02.jpg"
+                                                            class="img-fluid" alt=""></a>
+                                                </div>
+                                                <div class="cart-float-single-item-desc">
+                                                    <p class="product-title"> <a href="single-product.html">Fusce
+                                                            ultricies
+                                                            dolor vitae</a></p>
+                                                    <p class="price"><span class="count">1x</span> $20.50</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="cart-calculation">
+                                            <div class="calculation-details">
+                                                <p class="total">Subtotal <span>$22</span></p>
+                                            </div>
+                                            <div class="floating-cart-btn text-center">
+                                                <a href="checkout.html">Checkout</a>
+                                                <a href="cart.html">View Cart</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- end of cart floating box -->
+                                </div>
+                            @endif
                         </div>
 
                         <!-- navigation section -->
@@ -235,12 +357,12 @@
                                 <ul>
                                     @foreach ($headcategories as $headcategory)
                                         <li class="active menu-item-has-children"><a
-                                                href="#">{{ $headcategory->name_ru }}</a>
+                                                href="#">{{ $headcategory->name_uz }}</a>
                                             <ul class="sub-menu">
                                                 @foreach ($categories as $category)
                                                     @if ($category->head_category_id === $headcategory->id)
                                                         <li><a
-                                                                href="#{{ $category->name_ru }}">{{ $category->name_ru }}</a>
+                                                                href="/#{{ $category->name_uz }}">{{ $category->name_uz }}</a>
                                                         </li>
                                                     @endif
                                                 @endforeach

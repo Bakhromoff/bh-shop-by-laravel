@@ -40,7 +40,8 @@
                             @if ($errors->any())
                                 {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
                             @endif
-                            <form action="{{ route('categories.update', $category->id) }}" method="POST">
+                            <form action="{{ route('categories.update', $category->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
                                 <div class="form-group">
@@ -68,10 +69,10 @@
                                     <input type="text" name="emoji" class="form-control"
                                         value="{{ old('name', $category->emoji) }}">
                                 </div>
+                                <img class="img img-thumbnail" src="{{ $category->getImage() }}" alt=""
+                                    width="100">
                                 <div class="form-group" id="photo">
                                     <label>Изображение (Optional)</label>
-                                    <img class="img img-thumbnail" src="{{ $category->getImage() }}" alt=""
-                                        width="100">
                                     <input style="border: 0px; padding-left: 0px" type="file" name="image"
                                         class="form-control" value="">
                                 </div>

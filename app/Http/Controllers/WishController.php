@@ -25,6 +25,7 @@ class WishController extends Controller
 
     }
     public function destroy(Product $product) {
-
+            Wish::where('user_id', \Auth::user()->id)->where('product_id', $product->id)->delete();
+            return redirect()->back()->withErrors(['alert' => 'The product removed from wishlist!']);
     }
 }

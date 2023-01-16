@@ -143,19 +143,25 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/order" class="nav-link ">
+                            <a href="{{ route('ads.index') }}" class="nav-link @yield('ads-active')">
+                                <i class="fas fa-comment-alt" style="font-size: 1.4rem"></i>
+                                <p style="font-size: 22px; font-weight: 300;">Объявления</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="" class="nav-link ">
                                 <i class="fas fa-shopping-cart" style="font-size: 1.4rem"></i>
                                 <p style="font-size: 22px; font-weight: 300;">Заказы</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/botusers" class="nav-link ">
+                            <a href="" class="nav-link ">
                                 <i class="fas fa-users" style="font-size: 1.4rem"></i>
                                 <p style="font-size: 22px; font-weight: 300;">Пользователи</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="/complaint" class="nav-link ">
+                            <a href="" class="nav-link ">
                                 <i class="fas fa-file-alt" style="font-size: 1.4rem"></i>
                                 <p style="font-size: 22px; font-weight: 300;"> Жалоба</p>
                             </a>

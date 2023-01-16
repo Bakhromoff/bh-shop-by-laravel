@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\HeadCategory;
 use App\Models\Product;
+use App\Models\Wish;
 use App\Models\Category;
+use App\Models\Ad;
 
 class PageController extends Controller
 {
@@ -17,7 +19,8 @@ class PageController extends Controller
         }
         $categories = Category::all();
         $headcategories = HeadCategory::all();
-        return view('index', compact('products', 'categories', 'headcategories'));
+        $ads = Ad::all();
+        return view('index2', compact('products', 'categories', 'headcategories', 'ads'));
     }
     public function account() {
         return view('account');
@@ -26,6 +29,11 @@ class PageController extends Controller
         return redirect()->route('categories.index');
     }
     public function wishes() {
-        return view('wishlist');
+        $wishes = Wish::where('user_id', \Auth::user()->id)->get();
+        $products = Product::all();
+        return view('wishlist', compact('products', 'wishes'));
+    }
+    public function cart() {
+        return view('cart');
     }
 }

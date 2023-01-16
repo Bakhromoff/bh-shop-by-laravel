@@ -290,24 +290,20 @@
                                             //Count Down End Date
                                             //1000 milliseconds = 1 second
                                             countDownDate{{ $product->id }} = new Date("{{ $product->discount->format('M d, Y H:i:s') }}").getTime();
-
                                         let counter{{ $product->id }} = setInterval(() => {
                                             //Get Date Now
                                             let dateNow = new Date().getTime();
                                             //Find The Date Difference Between Now and End Date
                                             let dateDiff{{ $product->id }} = countDownDate{{ $product->id }} - dateNow;
-
                                             //Get Time Unit
                                             let day = Math.floor(dateDiff{{ $product->id }} / (1000 * 60 * 60 * 24));
                                             let hour = Math.floor((dateDiff{{ $product->id }} % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                                             let minute = Math.floor((dateDiff{{ $product->id }} % (1000 * 60 * 60)) / (1000 * 60));
                                             let second = Math.floor((dateDiff{{ $product->id }} % (1000 * 60)) / 1000);
-
                                             days{{ $product->id }}.innerHTML = day < 10 ? `0${day}` : day;
                                             hours{{ $product->id }}.innerHTML = hour < 10 ? `0${hour}` : hour;
                                             minutes{{ $product->id }}.innerHTML = minute < 10 ? `0${minute}` : minute;
                                             seconds{{ $product->id }}.innerHTML = second < 10 ? `0${second}` : second;
-
                                             if (dateDiff{{ $product->id }} == 0) {
                                                 clearInterval(counter{{ $product->id }});
                                             }

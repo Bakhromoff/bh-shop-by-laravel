@@ -1,47 +1,169 @@
+@extends('layouts.app')
 
+@section('title')
+    <title>Home</title>
+@endsection
 
-    <div class="hero-slider-container mb-35">
-        <!--=======  Slider area  =======-->
-
-        <div class="hero-slider-one">
-            <!--=======  hero slider item  =======-->
-
-            <div class="hero-slider-item slider-bg-1">
-                <div class="slider-content d-flex flex-column justify-content-center align-items-center">
-                    <h1>Organic Farm</h1>
-                    <p>get fresh food from our firm to your table</p>
-                    <a href="shop-left-sidebar.html" class="slider-btn">SHOP NOW</a>
-                </div>
-            </div>
-
-            <!--=======  End of hero slider item  =======-->
-
-
-            <!--=======  Hero slider item  =======-->
-
-            <div class="hero-slider-item slider-bg-2">
-                <div class="slider-content d-flex flex-column justify-content-center align-items-center">
-                    <h1>Fresh & Nature</h1>
-                    <p>get fresh food from our firm to your table</p>
-                    <a href="shop-left-sidebar.html" class="slider-btn">SHOP NOW</a>
-                </div>
-            </div>
-
-            <!--=======  End of Hero slider item  =======-->
-
+@section('content')
+    @if ($errors->any())
+        <div class="alert alert-success" role="alert" style="position: fixed; top: 50px; left: 20px; z-index: 1000000;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            {{ $errors->first() }}
         </div>
 
-        <!--=======  End of Slider area  =======-->
+        <script>
+            window.setTimeout(function() {
+                $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+            }, 4000);
+        </script>
+    @endif
 
+    <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
+        <ol class="carousel-indicators">
+            <?
+                                                                                            $i = 0;
+                                                                                            ?>
+            @foreach ($ads as $ad)
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ $ad->id }}"
+                    class="{{ $i === 0 ? 'active' : '' }}"></li>
+                <?
+                                                                                        $i++;
+                                                                                        ?>
+            @endforeach
+
+        </ol>
+        <div class="carousel-inner">
+            <?
+                                                                                            $i = 0;
+                                                                                            ?>
+            @foreach ($ads as $ad)
+                <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
+                    <img class="d-block w-100" src="{{ $ad->getImage() }}" style="max-width: 1600px; max-height: 600px;"
+                        alt="First slide">
+                    <div class="carousel-caption d-none d-md-block">
+                    </div>
+                </div>
+                <?
+                                                                                                $i++;
+                                                                                                ?>
+            @endforeach
+        </div>
+        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
     </div>
 
     <!--=====  End of Hero slider Area  ======-->
 
 
 
+    <div class="slider brand-logo-slider mb-35 mt-10">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--=======  blog slider section title  =======-->
+
+                    <div class="section-title">
+                        <h3>Brendlar</h3>
+                    </div>
+
+                    <!--=======  End of blog slider section title  =======-->
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--=======  brand logo wrapper  =======-->
+
+                    <div class="brand-logo-wrapper pt-20 pb-20">
+
+                        <!--=======  single-brand-logo  =======-->
+
+                        <div class="col">
+                            <div class="single-brand-logo">
+                                <a href="#">
+                                    <img src="assets/images/brands/brand1.png" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--=======  End of single-brand-logo  =======-->
+                        <!--=======  single-brand-logo  =======-->
+
+                        <div class="col">
+                            <div class="single-brand-logo">
+                                <a href="#">
+                                    <img src="assets/images/brands/brand2.png" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--=======  End of single-brand-logo  =======-->
+                        <!--=======  single-brand-logo  =======-->
+
+                        <div class="col">
+                            <div class="single-brand-logo">
+                                <a href="#">
+                                    <img src="assets/images/brands/brand3.png" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--=======  End of single-brand-logo  =======-->
+                        <!--=======  single-brand-logo  =======-->
+
+                        <div class="col">
+                            <div class="single-brand-logo">
+                                <a href="#">
+                                    <img src="assets/images/brands/brand4.png" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--=======  End of single-brand-logo  =======-->
+                        <!--=======  single-brand-logo  =======-->
+
+                        <div class="col">
+                            <div class="single-brand-logo">
+                                <a href="#">
+                                    <img src="assets/images/brands/brand5.png" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--=======  End of single-brand-logo  =======-->
+                        <!--=======  single-brand-logo  =======-->
+
+                        <div class="col">
+                            <div class="single-brand-logo">
+                                <a href="#">
+                                    <img src="assets/images/brands/brand6.png" class="img-fluid" alt="">
+                                </a>
+                            </div>
+                        </div>
+
+                        <!--=======  End of single-brand-logo  =======-->
+                    </div>
+
+                    <!--=======  End of brand logo wrapper  =======-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--=====  End of Brand logo slider  ======-->
+
     <!--=============================================
- =            Policy area         =
- =============================================-->
+                                                                                                                                                                                                                                                =            Policy area         =
+                                                                                                                                                                                                                                                =============================================-->
 
     <div class="policy-section mb-35">
         <div class="container">
@@ -68,8 +190,8 @@
                         <!--=======  End of single policy  =======-->
 
                         <!--=============================================
-      =            single policy         =
-      =============================================-->
+                                                                                                                                                                                                                                                  =            single policy         =
+                                                                                                                                                                                                                                                  =============================================-->
 
                         <div class="single-policy">
                             <span><img src="assets/images/policy-icon3.png" class="img-fluid" alt=""></span>
@@ -87,8 +209,8 @@
     <!--=====  End of Policy area  ======-->
 
     <!--=============================================
- =            category slider         =
- =============================================-->
+                                                                                                                                                                                                                                                =            category slider         =
+                                                                                                                                                                                                                                                =============================================-->
 
     <div class="slider category-slider mb-35">
         <div class="container">
@@ -97,7 +219,7 @@
                     <!--=======  category slider section title  =======-->
 
                     <div class="section-title">
-                        <h3>top categories</h3>
+                        <h3>Top kategoriyalar</h3>
                     </div>
 
                     <!--=======  End of category slider section title  =======-->
@@ -112,128 +234,28 @@
 
                         <!--=======  single category  =======-->
 
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Vegetables">
-                                    <img src="assets/images/categories/category1.png" class="img-fluid"
-                                        alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Vegetables</a>
-                                </h3>
-                            </div>
-                        </div>
+                        @foreach ($categories as $category)
+                            <!--=======  single category  =======-->
+                            @if ($category->isTop === 1)
+                                <div class="single-category">
+                                    <div class="category-image">
+                                        <a href="#{{ $category->name_ru }}" title="{{ $category->name_ru }}"
+                                            style="width: 131px; height: 131px;">
+                                            <img src="{{ $category->getImage() }}" class="img-fluid"
+                                                style="object-fit: fill; width: 121px; height: 121px;" alt="">
+                                        </a>
+                                    </div>
+                                    <div class="category-title">
+                                        <h3>
+                                            <a href="#{{ $category->name_ru }}">{{ $category->name_ru }}</a>
+                                        </h3>
+                                    </div>
+                                </div>
+                            @endif
 
-                        <!--=======  End of single category  =======-->
+                            <!--=======  End of single category  =======-->
+                        @endforeach
 
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Fast Food">
-                                    <img src="assets/images/categories/category2.png" class="img-fluid"
-                                        alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Fast Food</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Fish & Meats">
-                                    <img src="assets/images/categories/category3.png" class="img-fluid"
-                                        alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Fish & Meats</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Fruits">
-                                    <img src="assets/images/categories/category4.png" class="img-fluid"
-                                        alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Fruits</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Salads">
-                                    <img src="assets/images/categories/category5.png" class="img-fluid"
-                                        alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Salads</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Bread">
-                                    <img src="assets/images/categories/category6.png" class="img-fluid"
-                                        alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Bread</a>
-                                </h3>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single category  =======-->
-
-                        <!--=======  single category  =======-->
-
-                        <div class="single-category">
-                            <div class="category-image">
-                                <a href="shop-left-sidebar.html" title="Beans">
-                                    <img src="assets/images/categories/category7.png" class="img-fluid"
-                                        alt="">
-                                </a>
-                            </div>
-                            <div class="category-title">
-                                <h3>
-                                    <a href="shop-left-sidebar.html"> Beans</a>
-                                </h3>
-                            </div>
-                        </div>
 
                         <!--=======  End of single category  =======-->
 
@@ -249,8 +271,8 @@
     <!--=====  End of category slider  ======-->
 
     <!--=============================================
- =            Tab slider         =
- =============================================-->
+                                                                                                                                                                                                                                                =            Tab slider         =
+                                                                                                                                                                                                                                                =============================================-->
 
     <div class="slider tab-slider mb-35">
         <div class="container">
@@ -259,10 +281,10 @@
                     <div class="tab-slider-wrapper">
                         <nav>
                             <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                <a class="nav-item nav-link active" id="featured-tab" data-toggle="tab"
-                                    href="#featured" role="tab" aria-selected="true">Featured</a>
-                                <a class="nav-item nav-link" id="new-arrival-tab" data-toggle="tab"
-                                    href="#new-arrivals" role="tab" aria-selected="false">New Arrival</a>
+                                <a class="nav-item nav-link active" id="featured-tab" data-toggle="tab" href="#featured"
+                                    role="tab" aria-selected="true">Featured</a>
+                                <a class="nav-item nav-link" id="new-arrival-tab" data-toggle="tab" href="#new-arrivals"
+                                    role="tab" aria-selected="false">New Arrival</a>
                                 <a class="nav-item nav-link" id="nav-onsale-tab" data-toggle="tab" href="#on-sale"
                                     role="tab" aria-selected="false">On Sale</a>
                             </div>
@@ -1064,8 +1086,7 @@
 
                                 <!--=======  End of tab slider container  =======-->
                             </div>
-                            <div class="tab-pane fade" id="on-sale" role="tabpanel"
-                                aria-labelledby="nav-onsale-tab">
+                            <div class="tab-pane fade" id="on-sale" role="tabpanel" aria-labelledby="nav-onsale-tab">
                                 <!--=======  tab slider container  =======-->
 
                                 <div class="tab-slider-container">
@@ -1167,8 +1188,7 @@
                                                             class="icon_heart_alt"></span> </a>
                                                     <a href="#" data-tooltip="Compare"> <span
                                                             class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view"
-                                                        data-toggle="modal"
+                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
                                                         data-target="#quick-view-modal-container"> <span
                                                             class="icon_search"></span> </a>
                                                 </div>
@@ -1194,8 +1214,8 @@
                                         <div class="gf-product tab-slider-sub-product">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product02.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product02.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                                 <div class="product-hover-icons">
                                                     <a href="#" data-tooltip="Add to cart"> <span
@@ -1204,8 +1224,7 @@
                                                             class="icon_heart_alt"></span> </a>
                                                     <a href="#" data-tooltip="Compare"> <span
                                                             class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view"
-                                                        data-toggle="modal"
+                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
                                                         data-target="#quick-view-modal-container"> <span
                                                             class="icon_search"></span> </a>
                                                 </div>
@@ -1235,8 +1254,8 @@
                                         <div class="gf-product tab-slider-sub-product">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product03.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product03.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                                 <div class="product-hover-icons">
                                                     <a href="#" data-tooltip="Add to cart"> <span
@@ -1245,8 +1264,7 @@
                                                             class="icon_heart_alt"></span> </a>
                                                     <a href="#" data-tooltip="Compare"> <span
                                                             class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view"
-                                                        data-toggle="modal"
+                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
                                                         data-target="#quick-view-modal-container"> <span
                                                             class="icon_search"></span> </a>
                                                 </div>
@@ -1272,8 +1290,8 @@
                                             <div class="image">
                                                 <a href="single-product.html">
                                                     <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product04.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product04.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                                 <div class="product-hover-icons">
                                                     <a href="#" data-tooltip="Add to cart"> <span
@@ -1282,8 +1300,7 @@
                                                             class="icon_heart_alt"></span> </a>
                                                     <a href="#" data-tooltip="Compare"> <span
                                                             class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view"
-                                                        data-toggle="modal"
+                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
                                                         data-target="#quick-view-modal-container"> <span
                                                             class="icon_search"></span> </a>
                                                 </div>
@@ -1315,8 +1332,8 @@
                                             <div class="image">
                                                 <a href="single-product.html">
                                                     <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product05.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product05.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                                 <div class="product-hover-icons">
                                                     <a href="#" data-tooltip="Add to cart"> <span
@@ -1325,8 +1342,7 @@
                                                             class="icon_heart_alt"></span> </a>
                                                     <a href="#" data-tooltip="Compare"> <span
                                                             class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view"
-                                                        data-toggle="modal"
+                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
                                                         data-target="#quick-view-modal-container"> <span
                                                             class="icon_search"></span> </a>
                                                 </div>
@@ -1352,8 +1368,8 @@
                                         <div class="gf-product tab-slider-sub-product">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product06.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product06.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                                 <div class="product-hover-icons">
                                                     <a class="active" href="#" data-tooltip="Add to cart">
@@ -1362,8 +1378,7 @@
                                                             class="icon_heart_alt"></span> </a>
                                                     <a href="#" data-tooltip="Compare"> <span
                                                             class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view"
-                                                        data-toggle="modal"
+                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
                                                         data-target="#quick-view-modal-container"> <span
                                                             class="icon_search"></span> </a>
                                                 </div>
@@ -1393,8 +1408,8 @@
                                             <div class="image">
                                                 <a href="single-product.html">
                                                     <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product07.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product07.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                                 <div class="product-hover-icons">
                                                     <a href="#" data-tooltip="Add to cart"> <span
@@ -1403,8 +1418,7 @@
                                                             class="icon_heart_alt"></span> </a>
                                                     <a href="#" data-tooltip="Compare"> <span
                                                             class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view"
-                                                        data-toggle="modal"
+                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
                                                         data-target="#quick-view-modal-container"> <span
                                                             class="icon_search"></span> </a>
                                                 </div>
@@ -1431,8 +1445,8 @@
                                             <div class="image">
                                                 <a href="single-product.html">
                                                     <span class="onsale">Sale!</span>
-                                                    <img src="assets/images/products/product08.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product08.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                                 <div class="product-hover-icons">
                                                     <a href="#" data-tooltip="Add to cart"> <span
@@ -1441,8 +1455,7 @@
                                                             class="icon_heart_alt"></span> </a>
                                                     <a href="#" data-tooltip="Compare"> <span
                                                             class="arrow_left-right_alt"></span> </a>
-                                                    <a href="#" data-tooltip="Quick view"
-                                                        data-toggle="modal"
+                                                    <a href="#" data-tooltip="Quick view" data-toggle="modal"
                                                         data-target="#quick-view-modal-container"> <span
                                                             class="icon_search"></span> </a>
                                                 </div>
@@ -1479,8 +1492,8 @@
     <!--=====  End of Tab slider  ======-->
 
     <!--=============================================
- =            Featured product image gallery         =
- =============================================-->
+                                                                                                                                                                                                                                                =            Featured product image gallery         =
+                                                                                                                                                                                                                                                =============================================-->
 
     <div class="featured-product-image-gallery mb-80 pt-120 section-bg">
         <div class="container">
@@ -1574,8 +1587,8 @@
     <!--=====  End of Featured product image gallery  ======-->
 
     <!--=============================================
- =            Sale product slider         =
- =============================================-->
+                                                                                                                                                                                                                                                =            Sale product slider         =
+                                                                                                                                                                                                                                                =============================================-->
 
     <div class="sale-single-product-section mb-35">
         <div class="container">
@@ -1743,8 +1756,8 @@
     <!--=====  End of Sale product slider  ======-->
 
     <!--=============================================
- =            Best seller slider         =
- =============================================-->
+                                                                                                                                                                                                                                                =            Best seller slider         =
+                                                                                                                                                                                                                                                =============================================-->
 
     <div class="slider best-seller-slider mb-35">
         <div class="container">
@@ -1773,8 +1786,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product01.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product01.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -1799,8 +1812,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product02.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product02.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -1832,8 +1845,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product03.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product03.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -1858,8 +1871,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product04.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product04.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -1891,8 +1904,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product05.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product05.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -1917,8 +1930,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product06.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product06.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -1950,8 +1963,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product07.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product07.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -1976,8 +1989,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product08.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product08.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -2009,8 +2022,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product09.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product09.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -2035,8 +2048,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product10.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product10.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -2068,8 +2081,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product11.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product11.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -2094,8 +2107,8 @@
                                         <div class="col-lg-4 pl-0 pr-0">
                                             <div class="image">
                                                 <a href="single-product.html">
-                                                    <img src="assets/images/products/product12.jpg"
-                                                        class="img-fluid" alt="">
+                                                    <img src="assets/images/products/product12.jpg" class="img-fluid"
+                                                        alt="">
                                                 </a>
                                             </div>
                                         </div>
@@ -2130,8 +2143,8 @@
     <!--=====  End of Best seller slider  ======-->
 
     <!--=============================================
- =            Blog post slider container         =
- =============================================-->
+                                                                                                                                                                                                                                                =            Blog post slider container         =
+                                                                                                                                                                                                                                                =============================================-->
 
     <div class="slider blog-slider mb-35">
         <div class="container">
@@ -2254,104 +2267,4 @@
     </div>
 
     <!--=====  End of Blog post slider  ======-->
-
-
-    <!--=============================================
- =            Brand logo slider         =
- =============================================-->
-
-    <div class="slider brand-logo-slider mb-35">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  blog slider section title  =======-->
-
-                    <div class="section-title">
-                        <h3>brand logos</h3>
-                    </div>
-
-                    <!--=======  End of blog slider section title  =======-->
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <!--=======  brand logo wrapper  =======-->
-
-                    <div class="brand-logo-wrapper pt-20 pb-20">
-
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand1.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand2.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand3.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand4.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand5.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand6.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                    </div>
-
-                    <!--=======  End of brand logo wrapper  =======-->
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!--=====  End of Brand logo slider  ======-->
+@endsection
