@@ -8,6 +8,7 @@ use App\Models\Product;
 use App\Models\Wish;
 use App\Models\Category;
 use App\Models\Ad;
+use App\Models\Brand;
 
 class PageController extends Controller
 {
@@ -20,7 +21,8 @@ class PageController extends Controller
         $categories = Category::all();
         $headcategories = HeadCategory::all();
         $ads = Ad::all();
-        return view('index2', compact('products', 'categories', 'headcategories', 'ads'));
+        $brands = Brand::orderBy('id', 'desc')->get();
+        return view('index2', compact('products', 'categories', 'headcategories', 'ads', 'brands'));
     }
     public function account() {
         return view('account');

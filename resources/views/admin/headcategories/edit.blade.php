@@ -33,7 +33,7 @@
                 <div class="col-8 offset-2">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Добавить</h3>
+                            <h3 class="card-title">Изменить</h3>
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">

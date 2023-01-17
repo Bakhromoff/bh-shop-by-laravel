@@ -201,7 +201,7 @@
                             ?>
                                 <!-- shopping cart -->
                                 <div class="shopping-cart" id="shopping-cart">
-                                    <a href="{{ route('cart') }}">
+                                    <a href="{{ route('card') }}">
                                         <div class="cart-icon d-inline-block">
                                             <span class="icon_bag_alt"></span>
                                         </div>

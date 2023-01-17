@@ -104,7 +104,8 @@
                                                                     method="POST">
                                                                     @method('DELETE')
                                                                     @csrf
-                                                                    <button type="submit" class="btn btn-danger btn-sm">
+                                                                    <button type="submit" class="btn btn-danger btn-sm"
+                                                                        onclick="return confirm('Tasdiqlaysizmi ?')">
                                                                         Удалить</button>
                                                                 </form>
                                                             </div>

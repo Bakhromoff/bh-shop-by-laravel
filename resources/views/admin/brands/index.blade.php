@@ -1,6 +1,6 @@
 @extends('admin.app')
 
-@section('ads-active')
+@section('brands-active')
     active
 @endsection
 
@@ -38,7 +38,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">объявление</h3>
-                            <a href="{{ route('ads.create') }}" class="btn btn-success btn-sm float-right">
+                            <a href="{{ route('brands.create') }}" class="btn btn-success btn-sm float-right">
                                 <span class="fas fa-plus-circle"></span>
                                 Добавить </a>
                         </div>
@@ -51,26 +51,29 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
+                                        <th>Название</th>
                                         <th>Фото</th>
                                         <th class="w-25">Действия</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($ads as $ad)
+                                    @foreach ($brands as $brand)
                                         <tr>
-                                            <td>{{ $ad->id }}</td>
-                                            <td><img class="img img-thumbnail" src="{{ $ad->getImage() }}" alt=""
+                                            <td>{{ $brand->id }}</td>
+                                            <td>{{ $brand->name }}</td>
+                                            <td><img class="img img-thumbnail" src="{{ $brand->getImage() }}" alt=""
                                                     width="100"></td>
 
                                             <td class="text-center">
                                                 <div class="btn-group">
-                                                    <a href="{{ route('ads.edit', $ad->id) }}" type="button"
+                                                    <a href="{{ route('brands.edit', $brand->id) }}" type="button"
                                                         class="btn btn-info btn-sm">
                                                         Редактировать</a>
-                                                    <form action="{{ route('ads.destroy', $ad->id) }}" method="POST">
+                                                    <form action="{{ route('brands.destroy', $brand->id) }}" method="POST">
                                                         @method('DELETE')
                                                         @csrf
-                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tasdiqlaysizmi ?')">
+                                                        <button type="submit" class="btn btn-danger btn-sm"
+                                                            onclick="return confirm('Tasdiqlaysizmi ?')">
                                                             Удалить</button>
                                                     </form>
                                                 </div>

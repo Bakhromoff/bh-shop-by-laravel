@@ -1,6 +1,6 @@
 @extends('admin.app')
 
-@section('ads-active')
+@section('brands-active')
     active
 @endsection
 
@@ -13,13 +13,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Управление объявление</h1>
+                        <h1>Управление бренды</h1>
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="">Домой</a></li>
                             <li class="breadcrumb-item"><a href="">Управление
-                                    объявление</a></li>
+                                    бренды</a></li>
                             <li class="breadcrumb-item active">Добавить</li>
                         </ol>
                     </div>
@@ -37,13 +37,19 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <form action="{{ route('ads.update', $ad->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('brands.update', $brand->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @method('PUT')
                                 @csrf
+                                <div class="form-group">
+                                    <label>Название</label>
+                                    <input type="text" name="name" class="form-control"
+                                        value="{{ old('name', $brand->name) }}" required="">
+                                </div>
                                 <div class="form-group" id="photo">
-                                    <img class="img img-thumbnail" src="{{ $ad->getImage() }}" alt=""
+                                    <img class="img img-thumbnail" src="{{ $brand->getImage() }}" alt=""
                                         width="100">
-                                    <label>Изображение (Optional)</label>
+                                    <label>Изображение</label>
                                     <input style="border: 0px; padding-left: 0px" type="file" name="image"
                                         class="form-control" value="">
                                 </div>

@@ -149,6 +149,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a href="{{ route('brands.index') }}" class="nav-link @yield('brands-active')">
+                                <i class="fas fa-chess-king" style="font-size: 1.4rem"></i>
+                                <p style="font-size: 22px; font-weight: 300;">Бренды</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="" class="nav-link ">
                                 <i class="fas fa-shopping-cart" style="font-size: 1.4rem"></i>
                                 <p style="font-size: 22px; font-weight: 300;">Заказы</p>

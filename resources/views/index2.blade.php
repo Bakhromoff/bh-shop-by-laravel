@@ -24,21 +24,21 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
         <ol class="carousel-indicators">
             <?
-                                                                                            $i = 0;
-                                                                                            ?>
+                                                                                                                                                $i = 0;
+                                                                                                                                                ?>
             @foreach ($ads as $ad)
                 <li data-target="#carouselExampleIndicators" data-slide-to="{{ $ad->id }}"
                     class="{{ $i === 0 ? 'active' : '' }}"></li>
                 <?
-                                                                                        $i++;
-                                                                                        ?>
+                                                                                                                                            $i++;
+                                                                                                                                            ?>
             @endforeach
 
         </ol>
         <div class="carousel-inner">
             <?
-                                                                                            $i = 0;
-                                                                                            ?>
+                                                                                                                                                $i = 0;
+                                                                                                                                                ?>
             @foreach ($ads as $ad)
                 <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
                     <img class="d-block w-100" src="{{ $ad->getImage() }}" style="max-width: 1600px; max-height: 600px;"
@@ -47,8 +47,8 @@
                     </div>
                 </div>
                 <?
-                                                                                                $i++;
-                                                                                                ?>
+                                                                                                                                                    $i++;
+                                                                                                                                                    ?>
             @endforeach
         </div>
         <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -86,70 +86,17 @@
                     <div class="brand-logo-wrapper pt-20 pb-20">
 
                         <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand1.png" class="img-fluid" alt="">
-                                </a>
+                        @foreach ($brands as $brand)
+                            <div class="col">
+                                <div class="single-brand-logo">
+                                    <a href="#">
+                                        <img src="{{ $brand->getImage() }}"
+                                            style="max-width: 186px; max-height: 92px; object-fit: contain;"
+                                            class="img-fluid" alt="">
+                                    </a>
+                                </div>
                             </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand2.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand3.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand4.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand5.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
-                        <!--=======  End of single-brand-logo  =======-->
-                        <!--=======  single-brand-logo  =======-->
-
-                        <div class="col">
-                            <div class="single-brand-logo">
-                                <a href="#">
-                                    <img src="assets/images/brands/brand6.png" class="img-fluid" alt="">
-                                </a>
-                            </div>
-                        </div>
-
+                        @endforeach
                         <!--=======  End of single-brand-logo  =======-->
                     </div>
 
@@ -162,8 +109,8 @@
     <!--=====  End of Brand logo slider  ======-->
 
     <!--=============================================
-                                                                                                                                                                                                                                                =            Policy area         =
-                                                                                                                                                                                                                                                =============================================-->
+                                                                                                                                                                                                                                                                                                    =            Policy area         =
+                                                                                                                                                                                                                                                                                                    =============================================-->
 
     <div class="policy-section mb-35">
         <div class="container">
@@ -174,7 +121,7 @@
 
                         <div class="single-policy">
                             <span><img src="assets/images/policy-icon1.png" class="img-fluid" alt=""></span>
-                            <p> FREE SHIPPING ON ORDERS OVER $200</p>
+                            <p class=""> 200 ming so'mdan ortiq xaridlarni bepul yetkazib berish</p>
                         </div>
 
                         <!--=======  End of single policy  =======-->
@@ -184,18 +131,18 @@
 
                         <div class="single-policy">
                             <span><img src="assets/images/policy-icon2.png" class="img-fluid" alt=""></span>
-                            <p>30 -DAY RETURNS MONEY BACK</p>
+                            <p>Mahsulot yoqmasa pulni qaytarish</p>
                         </div>
 
                         <!--=======  End of single policy  =======-->
 
                         <!--=============================================
-                                                                                                                                                                                                                                                  =            single policy         =
-                                                                                                                                                                                                                                                  =============================================-->
+                                                                                                                                                                                                                                                                                                      =            single policy         =
+                                                                                                                                                                                                                                                                                                      =============================================-->
 
                         <div class="single-policy">
                             <span><img src="assets/images/policy-icon3.png" class="img-fluid" alt=""></span>
-                            <p> 24/7 SUPPORT</p>
+                            <p> 24/7 qo'llab quvvatlash</p>
                         </div>
 
                         <!--=====  End of single policy  ======-->
@@ -209,8 +156,8 @@
     <!--=====  End of Policy area  ======-->
 
     <!--=============================================
-                                                                                                                                                                                                                                                =            category slider         =
-                                                                                                                                                                                                                                                =============================================-->
+                                                                                                                                                                                                                                                                                                    =            category slider         =
+                                                                                                                                                                                                                                                                                                    =============================================-->
 
     <div class="slider category-slider mb-35">
         <div class="container">
@@ -271,8 +218,8 @@
     <!--=====  End of category slider  ======-->
 
     <!--=============================================
-                                                                                                                                                                                                                                                =            Tab slider         =
-                                                                                                                                                                                                                                                =============================================-->
+                                                                                                                                                                                                                                                                                                    =            Tab slider         =
+                                                                                                                                                                                                                                                                                                    =============================================-->
 
     <div class="slider tab-slider mb-35">
         <div class="container">
@@ -1492,8 +1439,8 @@
     <!--=====  End of Tab slider  ======-->
 
     <!--=============================================
-                                                                                                                                                                                                                                                =            Featured product image gallery         =
-                                                                                                                                                                                                                                                =============================================-->
+                                                                                                                                                                                                                                                                                                    =            Featured product image gallery         =
+                                                                                                                                                                                                                                                                                                    =============================================-->
 
     <div class="featured-product-image-gallery mb-80 pt-120 section-bg">
         <div class="container">
@@ -1587,8 +1534,8 @@
     <!--=====  End of Featured product image gallery  ======-->
 
     <!--=============================================
-                                                                                                                                                                                                                                                =            Sale product slider         =
-                                                                                                                                                                                                                                                =============================================-->
+                                                                                                                                                                                                                                                                                                    =            Sale product slider         =
+                                                                                                                                                                                                                                                                                                    =============================================-->
 
     <div class="sale-single-product-section mb-35">
         <div class="container">
@@ -1756,8 +1703,8 @@
     <!--=====  End of Sale product slider  ======-->
 
     <!--=============================================
-                                                                                                                                                                                                                                                =            Best seller slider         =
-                                                                                                                                                                                                                                                =============================================-->
+                                                                                                                                                                                                                                                                                                    =            Best seller slider         =
+                                                                                                                                                                                                                                                                                                    =============================================-->
 
     <div class="slider best-seller-slider mb-35">
         <div class="container">
@@ -2143,8 +2090,8 @@
     <!--=====  End of Best seller slider  ======-->
 
     <!--=============================================
-                                                                                                                                                                                                                                                =            Blog post slider container         =
-                                                                                                                                                                                                                                                =============================================-->
+                                                                                                                                                                                                                                                                                                    =            Blog post slider container         =
+                                                                                                                                                                                                                                                                                                    =============================================-->
 
     <div class="slider blog-slider mb-35">
         <div class="container">
