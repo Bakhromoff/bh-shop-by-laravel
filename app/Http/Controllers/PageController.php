@@ -13,16 +13,12 @@ use App\Models\Brand;
 class PageController extends Controller
 {
     public function index(Request $request) {
-        if ($request->has('search')) {
-            $products = Product::where('name_uz', 'like', '%'.$request->search.'%')->orWhere('name_ru', 'like', '%'.$request->search.'%')->get();
-        } else {
-            $products = Product::all();
-        }
+        $products = Product::all();
         $categories = Category::all();
         $headcategories = HeadCategory::all();
         $ads = Ad::all();
         $brands = Brand::orderBy('id', 'desc')->get();
-        return view('index2', compact('products', 'categories', 'headcategories', 'ads', 'brands'));
+        return view('index', compact('products', 'categories', 'headcategories', 'ads', 'brands'));
     }
     public function account() {
         return view('account');
@@ -37,5 +33,16 @@ class PageController extends Controller
     }
     public function cart() {
         return view('cart');
+    }
+    public function singleproduct(Product $product) {
+        return view('singleproduct', compact('product'));
+    }
+    public function brand_products(Brand $brand) {
+        $products = Product::where('name_uz', 'like', '%'.$brand->name.'%')->orWhere('name_ru', 'like', '%'.$brand->name.'%')->get();
+        return view('brand_products', compact('products'));
+    }
+    public function search(Request $request) {
+            $products = Product::where('name_uz', 'like', '%'.$request->name.'%')->orWhere('name_ru', 'like', '%'.$request->name.'%')->get();
+            return view('search', compact('products'));
     }
 }

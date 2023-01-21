@@ -30,10 +30,12 @@
                                             $product->id,
                                             \Auth::user()->wishlist->pluck('product_id')->toArray()))
                                             <tr>
-                                                <td class="pro-thumbnail"><a href="#"><img
+                                                <td class="pro-thumbnail"><a
+                                                        href="{{ route('singleproduct', $product->id) }}"><img
                                                             src="{{ $product->getImage() }}" style="max-height: 150px;"
                                                             class="img-fluid" alt="Product"></a></td>
-                                                <td class="pro-title"><a href="#">{{ $product->name_uz }}</a>
+                                                <td class="pro-title"><a
+                                                        href="{{ route('singleproduct', $product->id) }}">{{ $product->name_uz }}</a>
                                                 </td>
                                                 <td class="pro-price"><span>{{ $product->price }} sum</span></td>
                                                 <td class="pro-remove">

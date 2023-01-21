@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\Product;
 
-class Card extends Model
+class Cart extends Model
 {
     use HasFactory;
     public function user() {

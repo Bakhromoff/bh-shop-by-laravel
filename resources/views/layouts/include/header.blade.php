@@ -76,7 +76,7 @@
             background-color: #5d8801;
         }
 
-        .modal-card-button {
+        .modal-cart-button {
             background: #fff;
             border: 2px solid #e0e0e0;
             border-radius: 5px;
@@ -91,7 +91,7 @@
             text-transform: none;
         }
 
-        .modal-card-button:hover {
+        .modal-cart-button:hover {
             background-color: #80bb01;
             border-color: #80bb01;
             color: #fff;
@@ -99,6 +99,15 @@
 
         .cart-delete:hover {
             color: #80bb01;
+        }
+
+        .single-btn {
+            color: #666;
+        }
+
+        .single-btn:hover {
+            color: #80bb01;
+            text-decoration: none;
         }
     </style>
 
@@ -164,7 +173,7 @@
                     <div class="col-md-3 col-sm-12 col-xs-12 text-lg-left text-md-center text-sm-center">
                         <!-- logo -->
                         <div class="logo mt-15 mb-15">
-                            <a href="index.html">
+                            <a href="{{route('index')}}">
                                 <img src="assets/images/logo2.png" class="img-fluid" style="border-radius: 50%"
                                     alt="">
                             </a>
@@ -186,8 +195,8 @@
                             <!-- end of header phone number -->
                             <!-- search bar -->
                             <div class="header-advance-search">
-                                <form action="">
-                                    <input type="search" name="search" placeholder="Mahsulotni qidirish">
+                                <form action="{{ route('search') }}" method="">
+                                    <input type="search" name="name" placeholder="Mahsulotni qidirish">
                                     <button><span class="icon_search"></span></button>
                                 </form>
                             </div>
@@ -195,13 +204,13 @@
                             <!-- shopping cart -->
                             @if (\Auth::user())
                                 <?
-                                $cards = App\Models\Card::where('user_id', \Auth::user()->id);
+                                $carts = App\Models\Cart::where('user_id', \Auth::user()->id);
                                 $products = App\Models\Product::all();
 
                             ?>
                                 <!-- shopping cart -->
                                 <div class="shopping-cart" id="shopping-cart">
-                                    <a href="{{ route('card') }}">
+                                    <a href="{{ route('cart') }}">
                                         <div class="cart-icon d-inline-block">
                                             <span class="icon_bag_alt"></span>
                                         </div>
@@ -213,18 +222,18 @@
                                                 ?>
                                                 @forelse ($products as $product)
                                                     @if (in_array(
-                                                        $product->id,
-                                                        \Auth::user()->cards->pluck('product_id')->toArray()))
+                                                            $product->id,
+                                                            \Auth::user()->carts->pluck('product_id')->toArray()))
                                                         <?
-                                                        $card_product_count = \App\Models\Card::where('product_id', $product->id)->count();
-                                                        $sum = $sum + $card_product_count*$product->price;
+                                                        $sum = $sum + ($product->carts->count())*($product->price);
                                                         ?>
                                                     @endif
                                                 @empty
                                                     <p class="text-sm alert alert-dark">No data</p>
                                                 @endforelse
                                                 <span>
-                                                    {{ $cards->sum('count') }}items - {{ $sum }} sum
+                                                    {{ $carts->sum('count') }}items -
+                                                    {{ $sum }} sum
                                                 </span>
                                             </p>
                                         </div>
@@ -239,15 +248,14 @@
                                             ?>
                                             @forelse ($products as $product)
                                                 @if (in_array(
-                                                    $product->id,
-                                                    \Auth::user()->cards->pluck('product_id')->toArray()))
+                                                        $product->id,
+                                                        \Auth::user()->carts->pluck('product_id')->toArray()))
                                                     <?
-                                                    $card_product_count = \App\Models\Card::where('product_id', $product->id)->count();
-                                                    $sum = $sum + $card_product_count*$product->price;
+                                                    $sum = $sum + $product->carts->count()*$product->price;
                                                     ?>
                                                     <div class="cart-float-single-item d-flex">
                                                         <span class="remove-item">
-                                                            <form action="{{ route('cards.delete', $product->id) }}"
+                                                            <form action="{{ route('carts.delete', $product->id) }}"
                                                                 method="POST">
                                                                 @csrf
                                                                 <button class="btn btn-default cart-delete"
@@ -264,7 +272,7 @@
                                                                     href="single-product.html">{{ $product->name_uz }}</a>
                                                             </p>
                                                             <p class="price"><span
-                                                                    class="count">{{ $card_product_count }}x</span>
+                                                                    class="count">{{ $product->carts->sum('count') }}x</span>
                                                                 {{ $product->price }} sum</p>
                                                         </div>
                                                     </div>
@@ -362,7 +370,7 @@
                                                 @foreach ($categories as $category)
                                                     @if ($category->head_category_id === $headcategory->id)
                                                         <li><a
-                                                                href="/#{{ $category->name_uz }}">{{ $category->name_uz }}</a>
+                                                                href="/#{{ $category->name_uz }}">{{ $category->emoji }}{{ $category->name_uz }}</a>
                                                         </li>
                                                     @endif
                                                 @endforeach

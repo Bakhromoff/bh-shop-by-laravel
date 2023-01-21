@@ -16,5 +16,8 @@ class Product extends Model
     public function getImage() {
         return "/storage/product_images/".$this->image;
     }
+    public function carts() {
+        return $this->hasMany(Cart::class);
+    }
 
 }

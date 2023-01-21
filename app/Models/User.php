@@ -43,8 +43,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    public function cards() {
-        return $this->hasMany(Card::class, 'user_id', 'id');
+    public function carts() {
+        return $this->hasMany(Cart::class, 'user_id', 'id');
     }
     public function wishlist() {
         return $this->hasMany(Wish::class, 'user_id', 'id');

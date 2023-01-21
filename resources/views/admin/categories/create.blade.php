@@ -37,6 +37,9 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
+                            @if ($errors->any())
+                                {!! implode('', $errors->all('<div class="alert alert-danger">:message</div>')) !!}
+                            @endif
                             <form action="{{ route('categories.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="form-group">
