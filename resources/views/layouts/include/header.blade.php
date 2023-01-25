@@ -5,10 +5,11 @@
     <?
     $categories = App\Models\Category::all();
     $headcategories = App\Models\HeadCategory::all();
+    $info = App\Models\Information::first();
     ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Greenfarm - Organic Food eCommerce Bootstrap 4 Template</title>
+    <title>Halal market</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -173,7 +174,7 @@
                     <div class="col-md-3 col-sm-12 col-xs-12 text-lg-left text-md-center text-sm-center">
                         <!-- logo -->
                         <div class="logo mt-15 mb-15">
-                            <a href="{{route('index')}}">
+                            <a href="{{ route('index') }}">
                                 <img src="assets/images/logo2.png" class="img-fluid" style="border-radius: 50%"
                                     alt="">
                             </a>
@@ -189,7 +190,7 @@
                                     <img src="assets/images/icon-phone.png" class="img-fluid" alt="">
                                 </div>
                                 <div class="phone-number">
-                                    Tel: <span class="number">+998913979007</span>
+                                    Tel: <span class="number">{{ $info->phone }}</span>
                                 </div>
                             </div>
                             <!-- end of header phone number -->
@@ -216,25 +217,24 @@
                                         </div>
                                         <div class="cart-info d-inline-block">
 
-                                            <p>Shopping Cart
-                                                <?
+                                            <p>
+                                            <h4 class="m-0">Savat</h4>
+                                            <?
                                                 $sum = 0;
                                                 ?>
-                                                @forelse ($products as $product)
-                                                    @if (in_array(
-                                                            $product->id,
-                                                            \Auth::user()->carts->pluck('product_id')->toArray()))
-                                                        <?
+                                            @foreach ($products as $product)
+                                                @if (in_array(
+                                                        $product->id,
+                                                        \Auth::user()->carts->pluck('product_id')->toArray()))
+                                                    <?
                                                         $sum = $sum + ($product->carts->count())*($product->price);
                                                         ?>
-                                                    @endif
-                                                @empty
-                                                    <p class="text-sm alert alert-dark">No data</p>
-                                                @endforelse
-                                                <span>
-                                                    {{ $carts->sum('count') }}items -
-                                                    {{ $sum }} sum
-                                                </span>
+                                                @endif
+                                            @endforeach
+                                            <span>
+                                                {{ $carts->sum('count') }} dona -
+                                                {{ $sum }} so'm
+                                            </span>
                                             </p>
                                         </div>
                                     </a>
@@ -273,7 +273,7 @@
                                                             </p>
                                                             <p class="price"><span
                                                                     class="count">{{ $product->carts->sum('count') }}x</span>
-                                                                {{ $product->price }} sum</p>
+                                                                {{ $product->price }} so'm</p>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -282,15 +282,19 @@
 
 
                                         </div>
-                                        <div class="cart-calculation">
-                                            <div class="calculation-details">
-                                                <p class="total">Subtotal <span>{{ $sum }} sum</span></p>
+                                        @if ($carts->count() != 0)
+                                            <div class="cart-calculation">
+                                                <div class="calculation-details">
+                                                    <p class="total">Umumiy <span>{{ $sum }} sum</span></p>
+                                                </div>
+                                                <div class="floating-cart-btn text-center">
+                                                    <a href="">Hisob</a>
+                                                    <a href="{{ route('cart') }}">Ko'rish</a>
+                                                </div>
                                             </div>
-                                            <div class="floating-cart-btn text-center">
-                                                <a href="">Checkout</a>
-                                                <a href="cart.html">View Cart</a>
-                                            </div>
-                                        </div>
+                                        @else
+                                            <p class="text-sm alert alert-dark">Bo'sh</p>
+                                        @endif
                                     </div>
                                     <!-- end of cart floating box -->
                                 </div>
@@ -301,9 +305,9 @@
                                             <span class="icon_bag_alt"></span>
                                         </div>
                                         <div class="cart-info d-inline-block">
-                                            <p>Shopping Cart
+                                            <p>Savat
                                                 <span>
-                                                    0 items - $0.00
+                                                    0 dona - 0 so'm
                                                 </span>
                                             </p>
                                         </div>
@@ -381,7 +385,7 @@
                                     @endforeach
 
 
-                                    <li><a href="contact.html">CONTACT</a></li>
+                                    <li><a href="{{ route('contact') }}">Bog'lanish</a></li>
                                 </ul>
                             </nav>
                         </div>

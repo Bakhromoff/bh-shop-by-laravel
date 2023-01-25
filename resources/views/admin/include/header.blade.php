@@ -129,6 +129,12 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
+                            <a href="{{ route('admin') }}" class="nav-link @yield('info-active')">
+                                <i class="fas fa-info-circle" style="font-size: 1.4rem"></i>
+                                <p style="font-size: 22px; font-weight: 300;"> Инфо о сайте</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('categories.index') }}" class="nav-link @yield('categories-active')">
                                 <i class="fas fa-border-all" style="font-size: 1.4rem"></i>
                                 <p style="font-size: 22px; font-weight: 300;">
@@ -155,19 +161,20 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link ">
+                            <a href="{{ route('orders.index') }}" class="nav-link @yield('orders-active')">
                                 <i class="fas fa-shopping-cart" style="font-size: 1.4rem"></i>
                                 <p style="font-size: 22px; font-weight: 300;">Заказы</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link ">
+                            <a href="{{ route('users') }}" class="nav-link @yield('users-active')">
                                 <i class="fas fa-users" style="font-size: 1.4rem"></i>
                                 <p style="font-size: 22px; font-weight: 300;">Пользователи</p>
                             </a>
+
                         </li>
                         <li class="nav-item">
-                            <a href="" class="nav-link ">
+                            <a href="{{ route('messages.index') }}" class="nav-link @yield('messages-active')">
                                 <i class="fas fa-file-alt" style="font-size: 1.4rem"></i>
                                 <p style="font-size: 22px; font-weight: 300;"> Жалоба</p>
                             </a>

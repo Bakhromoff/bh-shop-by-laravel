@@ -16,16 +16,16 @@ class WishController extends Controller
         $wish->user_id = \Auth::user()->id;
         $wish->product_id = $product->id;
         $wish->save();
-        return redirect()->back()->withErrors(['alert' => 'The product added to wishlist successfully!']);
+        return redirect()->back()->withErrors(['alert' => 'Mahsulot saralanganlarga qo`shildi!']);
         } else {
             $check_wish->delete();
-            return redirect()->back()->withErrors(['alert' => 'The product removed from wishlist!']);
+            return redirect()->back()->withErrors(['alert' => 'Mahsulot saralanganlardan o`chirildi!']);
         }
 
 
     }
     public function destroy(Product $product) {
             Wish::where('user_id', \Auth::user()->id)->where('product_id', $product->id)->delete();
-            return redirect()->back()->withErrors(['alert' => 'The product removed from wishlist!']);
+            return redirect()->back()->withErrors(['alert' => 'Mahsulot saralanganlardan o`chirildi!']);
     }
 }

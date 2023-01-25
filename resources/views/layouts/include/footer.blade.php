@@ -3,7 +3,9 @@
  =============================================-->
 
 <footer>
-
+    <?
+        $info = App\Models\Information::first();
+        ?>
     <!--=======  social contact section  =======-->
 
     <div class="social-contact-section pt-50 pb-50">
@@ -46,7 +48,7 @@
                                     <span class="icon_pin_alt"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Manzil: <span>Farg'ona tumani Yangiavlod ko'cha 109</span></p>
+                                    <p>Manzil: <span>{{ $info->address_ru }}</span></p>
                                 </div>
                             </div>
 
@@ -58,7 +60,7 @@
                                     <span class="icon_mobile"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Tel: <span>+998913979007</span></p>
+                                    <p>Tel: <span>{{ $info->phone }}</span></p>
                                 </div>
                             </div>
 
@@ -70,7 +72,7 @@
                                     <span class="icon_mail_alt"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Email: <span>hotamtoy9007@gmail.com</span></p>
+                                    <p>Email: <span>{{ $info->email }}</span></p>
                                 </div>
                             </div>
 
