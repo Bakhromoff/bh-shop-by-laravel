@@ -1,18 +1,34 @@
 @extends('layouts.app')
 
 @section('title')
-    <title>My account</title>
+    <title>Shaxsiy ma'lumotlar</title>
 @endsection
 
 @section('content')
+    @if ($errors->any())
+        <div class="alert alert-success" role="alert"
+            style="position: fixed; width: 30%; top: 10%; left: 20%; z-index: 1000000;">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+            {{ $errors->first() }}
+        </div>
+
+        <script>
+            window.setTimeout(function() {
+                $(".alert").fadeTo(500, 0).slideUp(500, function() {
+                    $(this).remove();
+                });
+            }, 4000);
+        </script>
+    @endif
     <div class="breadcrumb-area mb-50">
         <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="breadcrumb-container">
                         <ul>
-                            <li><a href="index.html"><i class="fa fa-home"></i> Home</a></li>
-                            <li class="active">My Account</li>
+                            <li><a href="{{ route('index') }}"><i class="fa fa-home"></i> Bosh sahifa</a></li>
+                            <li class="active">Shaxsiy ma'lumotlar</li>
                         </ul>
                     </div>
                 </div>
@@ -31,24 +47,16 @@
                         <!-- My Account Tab Menu Start -->
                         <div class="col-lg-3 col-12">
                             <div class="myaccount-tab-menu nav" role="tablist">
-                                <a href="#dashboad" class="active" data-toggle="tab"><i class="fa fa-dashboard"></i>
-                                    Dashboard</a>
 
-                                <a href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i> Orders</a>
+                                <a class="active" href="#orders" data-toggle="tab"><i class="fa fa-cart-arrow-down"></i>
+                                    Buyurtmalar</a>
 
-                                <a href="#download" data-toggle="tab"><i class="fa fa-cloud-download"></i> Download</a>
-
-                                <a href="#payment-method" data-toggle="tab"><i class="fa fa-credit-card"></i> Payment
-                                    Method</a>
-
-                                <a href="#address-edit" data-toggle="tab"><i class="fa fa-map-marker"></i> address</a>
-
-                                <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i> Account Details</a>
+                                <a href="#account-info" data-toggle="tab"><i class="fa fa-user"></i>Shaxsiy ma'lumotlar</a>
                                 <form class="px-3 logout-form" id="logout-form" action="{{ route('logout') }}"
                                     method="POST">
                                     @csrf
-                                    <button class="btn btn-link w-100 text-left text-secondary" type="submit"><i
-                                            class="fa fa-sign-out"></i>
+                                    <button class="logout-button btn btn-default w-100 text-left text-secondary"
+                                        type="submit"><i class="fa fa-sign-out"></i>
                                         Logout</button>
                                 </form>
                             </div>
@@ -59,196 +67,233 @@
                         <div class="col-lg-9 col-12">
                             <div class="tab-content" id="myaccountContent">
                                 <!-- Single Tab Content Start -->
-                                <div class="tab-pane fade show active" id="dashboad" role="tabpanel">
+                                <div class="tab-pane fade active show" id="orders" role="tabpanel">
                                     <div class="myaccount-content">
-                                        <h3>Dashboard</h3>
-
-                                        <div class="welcome">
-                                            <p>Hello, <strong>Alex Tuntuni</strong> (If Not <strong>Tuntuni !</strong><a
-                                                    href="login-register.html" class="logout"> Logout</a>)</p>
-                                        </div>
-
-                                        <p class="mb-0">From your account dashboard. you can easily check &amp; view your
-                                            recent orders, manage your shipping and billing addresses and edit your
-                                            password and account details.</p>
-                                    </div>
-                                </div>
-                                <!-- Single Tab Content End -->
-
-                                <!-- Single Tab Content Start -->
-                                <div class="tab-pane fade" id="orders" role="tabpanel">
-                                    <div class="myaccount-content">
-                                        <h3>Orders</h3>
+                                        <h3 class="blackcolor">Buyurtmalar</h3>
 
                                         <div class="myaccount-table table-responsive text-center">
+
                                             <table class="table table-bordered">
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th>No</th>
-                                                        <th>Name</th>
-                                                        <th>Date</th>
+
+                                                        <th>Sana</th>
                                                         <th>Status</th>
-                                                        <th>Total</th>
-                                                        <th>Action</th>
+                                                        <th>Umumiy narx</th>
+                                                        {{-- <th>Mahsulotlar</th> --}}
                                                     </tr>
                                                 </thead>
 
                                                 <tbody>
-                                                    <tr>
-                                                        <td>1</td>
-                                                        <td>Mostarizing Oil</td>
-                                                        <td>Aug 22, 2018</td>
-                                                        <td>Pending</td>
-                                                        <td>$45</td>
-                                                        <td><a href="cart.html" class="btn">View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>2</td>
-                                                        <td>Katopeno Altuni</td>
-                                                        <td>July 22, 2018</td>
-                                                        <td>Approved</td>
-                                                        <td>$100</td>
-                                                        <td><a href="cart.html" class="btn">View</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>3</td>
-                                                        <td>Murikhete Paris</td>
-                                                        <td>June 12, 2017</td>
-                                                        <td>On Hold</td>
-                                                        <td>$99</td>
-                                                        <td><a href="cart.html" class="btn">View</a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
+                                                    <?
+                                                                                                        $i = 1;
+                                                                                                        ?>
+                                                    @forelse (\Auth::user()->orders as $order)
+                                                        <tr>
+                                                            <td class="blackcolor">{{ $i }}</td>
+                                                            <td class="blackcolor">{{ $order->created_at }}</td>
+                                                            <td class="blackcolor">
+                                                                <?
+                                                                                                                if ($order->user_order_status == 4) {
+                                                                                                                    echo "Qabul qilindi";
+                                                                                                                } elseif ($order->user_order_status == 3) {
+                                                                                                                    echo "Jonatildi";
+                                                                                                                } elseif ($order->user_order_status == 2) {
+                                                                                                                    echo "Bekor qilindi";
+                                                                                                                } else {
+                                                                                                                    echo "Jarayonda";
+                                                                                                                }
+
+                                                                                                                ?>
+                                                            </td>
+                                                            <td class="blackcolor">{{ $order->user_order_summary }} so'm
+                                                            </td>
+                                                            {{-- <td class="blackcolor">
+
+                                                        <a class="blackcolor" href="#"
+                                                        data-tooltip="Quick view" data-toggle="modal"
+                                                        data-target="#modal-{{ $order->id }}">
+                                                        Ko'rish </a>
+                                                    </td> --}}
+                                                        </tr>
+                                                        <?
+                                                                                                        $i++;
+                                                                                                        ?>
+
+
+                                                        <div class="modal fade quick-view-modal-container"
+                                                            id="modal-{{ $order->id }}" tabindex="-1" role="dialog"
+                                                            aria-hidden="true">
+                                                            <div style="max-width: 700px;"
+                                                                class="modal-dialog modal-dialog-centered" role="document">
+                                                                <div class="modal-content"
+                                                                    style="background-color: #FFFFFF;">
+                                                                    <div class="modal-header">
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span class="blackcolor"
+                                                                                aria-hidden="true">×</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="col-12">
+                                                                                <div class="row" id="cartTable"
+                                                                                    style="background-color: #ffffff; margin-bottom: 30px;">
+                                                                                    <div class="col-12"
+                                                                                        style="margin-top: 15px">
+                                                                                        <h3 class="blackcolor">Mening
+                                                                                            buyurtmam</h3>
+                                                                                    </div>
+                                                                                    <div class="col-12 blackcolor">
+
+                                                                                        <div class=""
+                                                                                            style="display: flex; flex-direction: row; -webkit-box-align: center; align-items: center; border-bottom-width: 0px;  border-color: rgb(244, 244, 244);  margin: 10px 0px 0px; padding-bottom: 10px;">
+
+                                                                                            <img src="{{ $order->product }}"
+                                                                                                class="img-fluid"
+                                                                                                alt="Product"
+                                                                                                style="width: 120px;    height: 80px;    object-fit: contain;    object-position: center center;">
+                                                                                            <div
+                                                                                                style="flex: 1 1 0%; display: flex; flex-direction: row;">
+                                                                                                <span class="blackcolor"
+                                                                                                    style="flex: 1 1 0%; font-weight: 600; font-style: normal; font-size: 16px; line-height: 16px; margin-right: 16px; color: #fff"></span>
+                                                                                                <div
+                                                                                                    style="display: flex; flex-direction: row; -webkit-box-align: center; align-items: center;">
+                                                                                                    <span class="blackcolor"
+                                                                                                        style="font-size: 16px; line-height: 16px; margin-right: 20px;">1
+                                                                                                        шт.</span>
+                                                                                                    <span class="blackcolor"
+                                                                                                        style="flex: 1 1 0%; font-weight: 600; font-style: normal; line-height: 16px; margin-right: 16px; color: #fff;">9
+                                                                                                        990 so'm</span>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="col-12">
+                                                                    <div class="row" id="cartTable"
+                                                                        style="background-color: #ffffff; margin-bottom: 30px;">
+                                                                        <div class="col-12" style="margin-top: 15px">
+                                                                            <h3 class="blackcolor">Buyurtmani
+                                                                                yetkazib
+                                                                                berish ma'lumotlari</h3>
+                                                                            <div class="blackcolor">
+
+                                                                                <div class="blackcolor"
+                                                                                    style="display: flex;    flex-direction: row;    flex: 1 1 0%;">
+                                                                                    <span style="">Ism:</span>
+                                                                                    <span
+                                                                                        style="position: absolute; right: 0; font-weight: 600; margin-right: 16px;">
+                                                                                        Dddddd</span>
+                                                                                </div>
+                                                                                <div class="blackcolor"
+                                                                                    style="display: flex;    flex-direction: row;    flex: 1 1 0%;">
+                                                                                    <span style="">Telefon:</span>
+                                                                                    <span
+                                                                                        style="position: absolute; right: 0; font-weight: 600; margin-right: 16px;">
+                                                                                        998913979007</span>
+                                                                                </div>
+                                                                                <div class="blackcolor"
+                                                                                    style="display: flex;    flex-direction: row;    flex: 1 1 0%;">
+                                                                                    <span style="">Manzil:</span>
+                                                                                    <span
+                                                                                        style="position: absolute; right: 0; font-weight: 600; margin-right: 16px;">
+                                                                                        Vodil</span>
+                                                                                </div>
+                                                                                <div class="blackcolor"
+                                                                                    style="display: flex;    flex-direction: row;    flex: 1 1 0%;">
+                                                                                    <span style="">Buyurtmaga
+                                                                                        izoh:</span>
+                                                                                    <span
+                                                                                        style="position: absolute; right: 0; font-weight: 600; margin-right: 16px;">
+                                                                                        -</span>
+                                                                                </div>
+                                                                                <div class="blackcolor"
+                                                                                    style="display: flex;    flex-direction: row;    flex: 1 1 0%;">
+                                                                                    <span style="">To’lov
+                                                                                        turi:</span>
+                                                                                    <span
+                                                                                        style="position: absolute; right: 0; font-weight: 600; margin-right: 16px;">
+                                                                                        Naqt</span>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
                                         </div>
+
                                     </div>
                                 </div>
-                                <!-- Single Tab Content End -->
+                            @empty
+                                <p class="text-left alert alert-dark">Xech narsa topilmadi</p>
+                                @endforelse
 
-                                <!-- Single Tab Content Start -->
-                                <div class="tab-pane fade" id="download" role="tabpanel">
-                                    <div class="myaccount-content">
-                                        <h3>Downloads</h3>
 
-                                        <div class="myaccount-table table-responsive text-center">
-                                            <table class="table table-bordered">
-                                                <thead class="thead-light">
-                                                    <tr>
-                                                        <th>Product</th>
-                                                        <th>Date</th>
-                                                        <th>Expire</th>
-                                                        <th>Download</th>
-                                                    </tr>
-                                                </thead>
 
-                                                <tbody>
-                                                    <tr>
-                                                        <td>Mostarizing Oil</td>
-                                                        <td>Aug 22, 2018</td>
-                                                        <td>Yes</td>
-                                                        <td><a href="#" class="btn">Download File</a></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td>Katopeno Altuni</td>
-                                                        <td>Sep 12, 2018</td>
-                                                        <td>Never</td>
-                                                        <td><a href="#" class="btn">Download File</a></td>
-                                                    </tr>
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Tab Content End -->
-
-                                <!-- Single Tab Content Start -->
-                                <div class="tab-pane fade" id="payment-method" role="tabpanel">
-                                    <div class="myaccount-content">
-                                        <h3>Payment Method</h3>
-
-                                        <p class="saved-message">You Can't Saved Your Payment Method yet.</p>
-                                    </div>
-                                </div>
-                                <!-- Single Tab Content End -->
-
-                                <!-- Single Tab Content Start -->
-                                <div class="tab-pane fade" id="address-edit" role="tabpanel">
-                                    <div class="myaccount-content">
-                                        <h3>Billing Address</h3>
-
-                                        <address>
-                                            <p><strong>Alex Tuntuni</strong></p>
-                                            <p>1355 Market St, Suite 900 <br>
-                                                San Francisco, CA 94103</p>
-                                            <p>Mobile: (123) 456-7890</p>
-                                        </address>
-
-                                        <a href="#" class="btn d-inline-block edit-address-btn"><i
-                                                class="fa fa-edit"></i>Edit Address</a>
-                                    </div>
-                                </div>
-                                <!-- Single Tab Content End -->
-
-                                <!-- Single Tab Content Start -->
-                                <div class="tab-pane fade" id="account-info" role="tabpanel">
-                                    <div class="myaccount-content">
-                                        <h3>Account Details</h3>
-
-                                        <div class="account-details-form">
-                                            <form action="#">
-                                                <div class="row">
-                                                    <div class="col-lg-6 col-12 mb-30">
-                                                        <input id="first-name" placeholder="First Name" type="text">
-                                                    </div>
-
-                                                    <div class="col-lg-6 col-12 mb-30">
-                                                        <input id="last-name" placeholder="Last Name" type="text">
-                                                    </div>
-
-                                                    <div class="col-12 mb-30">
-                                                        <input id="display-name" placeholder="Display Name"
-                                                            type="text">
-                                                    </div>
-
-                                                    <div class="col-12 mb-30">
-                                                        <input id="email" placeholder="Email Address" type="email">
-                                                    </div>
-
-                                                    <div class="col-12 mb-30">
-                                                        <h4>Password change</h4>
-                                                    </div>
-
-                                                    <div class="col-12 mb-30">
-                                                        <input id="current-pwd" placeholder="Current Password"
-                                                            type="password">
-                                                    </div>
-
-                                                    <div class="col-lg-6 col-12 mb-30">
-                                                        <input id="new-pwd" placeholder="New Password" type="password">
-                                                    </div>
-
-                                                    <div class="col-lg-6 col-12 mb-30">
-                                                        <input id="confirm-pwd" placeholder="Confirm Password"
-                                                            type="password">
-                                                    </div>
-
-                                                    <div class="col-12">
-                                                        <button class="save-change-btn">Save Changes</button>
-                                                    </div>
-
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Single Tab Content End -->
+                                </tbody>
+                                </table>
                             </div>
                         </div>
-                        <!-- My Account Tab Content End -->
                     </div>
 
+                    <!-- Single Tab Content Start -->
+                    <div class="tab-pane fade" id="account-info" role="tabpanel">
+                        <div class="myaccount-content">
+                            <h3 class="blackcolor">Shaxsiy ma'lumotlar</h3>
+
+                            <div class="account-details-form">
+                                <form action="{{ route('users.update', \Auth::user()->id) }}" method="POST">
+                                    @csrf
+                                    <div class="row">
+                                        <div class="col-lg-12 col-12 mb-30">
+                                            <input class="blackcolor" name="name" id="name"
+                                                placeholder="First Name" value="{{ \Auth::user()->name }}"
+                                                type="text">
+                                        </div>
+
+                                        <div class="col-12 mb-30">
+                                            <input class="" value="{{ \Auth::user()->email }}" type="email"
+                                                name="email">
+                                        </div>
+
+                                        <div class="col-lg-12 col-12 mb-30">
+                                            <input class="blackcolor" name="password" minlength="4" id="new-pwd"
+                                                placeholder="Yangi parol" type="password">
+                                        </div>
+
+                                        <div class="col-lg-12 col-12 mb-30">
+                                            <input class="blackcolor" name="password_confirmation" minlength="4"
+                                                id="confirm-pwd" placeholder="Yangi parolni qayta kiriting"
+                                                type="password">
+                                        </div>
+
+                                        <div class="col-12">
+                                            <button class="save-change-btn" style="border-radius: 5px;">Saqlash</button>
+                                        </div>
+
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Single Tab Content End -->
                 </div>
             </div>
+            <!-- My Account Tab Content End -->
         </div>
+
+    </div>
+    </div>
+    </div>
     </div>
 @endsection

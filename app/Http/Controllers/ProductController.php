@@ -15,7 +15,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::orderBy('id', 'DESC')->paginate(10);
         return view('admin.products.index', compact('products'));
     }
 
@@ -39,8 +39,8 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name_ru' => 'required|max:30',
-            'name_uz' => 'required|max:30',
+            'name_ru' => 'required|max:70',
+            'name_uz' => 'required|max:70',
             'description_ru' => 'required',
             'description_uz' => 'required',
             'price' => 'required',
@@ -102,8 +102,8 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $request->validate([
-            'name_ru' => 'required|max:30',
-            'name_uz' => 'required|max:30',
+            'name_ru' => 'required|max:70',
+            'name_uz' => 'required|max:70',
             'description_ru' => 'required',
             'description_uz' => 'required',
             'price' => 'required',

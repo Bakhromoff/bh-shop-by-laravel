@@ -103,12 +103,12 @@
                     <!--=======  single navigation section  =======-->
 
                     <div class="single-navigation-section">
-                        <h3 class="nav-section-title">INFORMATION</h3>
+                        <h3 class="nav-section-title">Ma'lumot</h3>
                         <ul>
-                            <li> <a href="about-us.html">About Us</a></li>
-                            <li> <a href="#">Delivery Information</a></li>
-                            <li> <a href="#">Privacy Policy</a></li>
-                            <li> <a href="#">Terms & Condition</a></li>
+                            <li> <a href="#">Biz haqimizda</a></li>
+                            <li> <a href="#">Yetkazib berish haqida ma'lumot</a></li>
+                            <li> <a href="#">Maxfiylik siyosati</a></li>
+                            <li> <a href="#">Foydalanish shartlari</a></li>
                         </ul>
                     </div>
 
@@ -118,12 +118,11 @@
                     <!--=======  single navigation section  =======-->
 
                     <div class="single-navigation-section">
-                        <h3 class="nav-section-title">MY ACCOUNT</h3>
+                        <h3 class="nav-section-title">MENING SAHIFAM</h3>
                         <ul>
-                            <li> <a href="my-account.html">My Account</a></li>
-                            <li> <a href="wishlist.html">Wishlist</a></li>
-                            <li> <a href="cart.html">Shopping Cart</a></li>
-                            <li> <a href="#">Newsletter</a></li>
+                            <li> <a href="{{ route('account') }}">Mening akkauntim</a></li>
+                            <li> <a href="{{ route('wishes.index') }}">Saralangan</a></li>
+                            <li> <a href="{{ route('cart') }}">Savat</a></li>
                         </ul>
                     </div>
 
@@ -133,29 +132,15 @@
                     <!--=======  single navigation section  =======-->
 
                     <div class="single-navigation-section">
-                        <h3 class="nav-section-title">CUSTOMER SERVICE</h3>
+                        <h3 class="nav-section-title">Mijozlar xizmati</h3>
                         <ul>
-                            <li> <a href="contact.html">Contact</a></li>
-                            <li> <a href="#">OUR SERVICE</a></li>
-                            <li> <a href="#">RETURNS</a></li>
-                            <li> <a href="#">SITE MAP</a></li>
+                            <li> <a href="{{ route('contact') }}">Bog'lanish</a></li>
                         </ul>
                     </div>
 
                     <!--=======  End of single navigation section  =======-->
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <!--=======  single navigation section  =======-->
-
-                    <div class="single-navigation-section">
-                        <h3 class="nav-section-title">Extras</h3>
-                        <ul>
-                            <li> <a href="contact.html">BRANDS</a></li>
-                            <li> <a href="#">GIFT VOUCHERS</a></li>
-                            <li> <a href="#">AFFILIATES</a></li>
-                            <li> <a href="#">SPECIALS</a></li>
-                        </ul>
-                    </div>
 
                     <!--=======  End of single navigation section  =======-->
                 </div>
@@ -176,12 +161,11 @@
 
                     <div class="copyright-segment">
                         <p>
-                            <a href="#">Privacy Policy</a>
+                            <a href="#">Maxfiylik siyosati</a>
                             <span class="separator">|</span>
-                            <a href="#">Term and conditions</a>
+                            <a href="#">Foydalanish shartlari</a>
                         </p>
-                        <p class="copyright-text">&copy; 2021 <a href="/">Greenfarm</a>. All Rights Reserved
-                        </p>
+
                     </div>
 
                     <!--=======  End of copyright text	  =======-->
@@ -191,8 +175,9 @@
                     <!--=======  payment info  =======-->
 
                     <div class="payment-info text-center text-md-right">
-                        <p>Allow payment base on <img src="assets/images/payment-icon.png" class="img-fluid"
-                                alt=""></p>
+                        <p class="copyright-text">&copy; 2022 <a href="/">Halal.uz</a>. Barcha huquqlar
+                            himoyalangan
+                        </p>
                     </div>
 
                     <!--=======  End of payment info  =======-->

@@ -13,4 +13,7 @@ class Order extends Model
         'user_order_products' => 'array',
         'user_product_counts' => 'array',
     ];
+    public function product() {
+        return $this->belongsTo(Product::class);
+    }
 }

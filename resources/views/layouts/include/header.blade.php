@@ -9,7 +9,7 @@
     ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Halal market</title>
+    @yield('title')
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -98,6 +98,12 @@
             color: #fff;
         }
 
+        .logout-button:hover {
+            background-color: #80bb01;
+            border-color: #80bb01;
+            color: #fff;
+        }
+
         .cart-delete:hover {
             color: #80bb01;
         }
@@ -122,13 +128,15 @@
 
     <header>
         <!--=======  header top  =======-->
-
+        <?
+            $name = "name_".__('words.lang');
+        ?>
         <div class="header-top pt-10 pb-10 pt-lg-10 pb-lg-10 pt-md-10 pb-md-10">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12 text-center text-sm-left">
                         <!-- currncy language dropdown -->
-                        <p class="">Halal.uz ga xush kelibsiz</p>
+                        <p class="">{{ __('words.welcome') }}</p>
                         <!-- end of currncy language dropdown -->
                     </div>
                     <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12  text-center text-sm-right">
@@ -138,16 +146,22 @@
                                 <!-- header top menu -->
                                 <div class="header-top-menu blackcolor">
                                     <ul class="d-flex justify-content-end">
-                                        <li><a href="/language/uz" class="blackcolor activelang">UZ</a></li>
-                                        <li><a href="/language/ru" class="blackcolor ">RU</a></li>
+                                        <li><a href="/lang/uz"
+                                                class="blackcolor {{ session('lang') == 'uz' ? 'activelang' : '' }}">UZ</a>
+                                        </li>
+                                        <li style="margin-left: 10px;"><a href="/lang/ru"
+                                                class="blackcolor {{ session('lang') == 'ru' ? 'activelang' : '' }}">RU</a>
+                                        </li>
                                         @if (Route::has('login'))
                                             @auth
-                                                <li><a href="{{ route('wishes.index') }}">Saralangan</a></li>
-                                                <li><a class="blackcolor d-flex" href="{{ route('account') }}"><i
-                                                            class="material-icons opacity-10">account_circle</i>{{ Auth::user()->name }}</a>
+                                                <li><a href="{{ route('wishes.index') }}">{{ __('words.wishlist') }}</a>
+                                                </li>
+                                                <li><a class="blackcolor d-flex align-items-center"
+                                                        href="{{ route('account') }}"><i style="color: #80bb01;"
+                                                            class="fa fa-user"></i>{{ Auth::user()->name }}</a>
                                                 </li>
                                             @else
-                                                <li><a class="blackcolor" href="/login">Login</a></li>
+                                                <li><a class="blackcolor" href="/login">{{ __('words.kirish') }}</a></li>
                                             @endauth
                                         @endif
 
@@ -190,14 +204,14 @@
                                     <img src="assets/images/icon-phone.png" class="img-fluid" alt="">
                                 </div>
                                 <div class="phone-number">
-                                    Tel: <span class="number">{{ $info->phone }}</span>
+                                    {{ __('words.phone') }}: <span class="number">{{ $info->phone }}</span>
                                 </div>
                             </div>
                             <!-- end of header phone number -->
                             <!-- search bar -->
                             <div class="header-advance-search">
                                 <form action="{{ route('search') }}" method="">
-                                    <input type="search" name="name" placeholder="Mahsulotni qidirish">
+                                    <input type="search" name="name" placeholder="{{ __('words.search') }}">
                                     <button><span class="icon_search"></span></button>
                                 </form>
                             </div>
@@ -218,7 +232,7 @@
                                         <div class="cart-info d-inline-block">
 
                                             <p>
-                                            <h4 class="m-0">Savat</h4>
+                                            <h4 class="m-0">{{ __('words.savat') }}</h4>
                                             <?
                                                 $sum = 0;
                                                 ?>
@@ -232,8 +246,8 @@
                                                 @endif
                                             @endforeach
                                             <span>
-                                                {{ $carts->sum('count') }} dona -
-                                                {{ $sum }} so'm
+                                                {{ $carts->sum('count') }} {{ __('words.dona') }} -
+                                                {{ $sum }} {{ __('words.value') }}
                                             </span>
                                             </p>
                                         </div>
@@ -269,11 +283,11 @@
                                                         </div>
                                                         <div class="cart-float-single-item-desc">
                                                             <p class="product-title"> <a
-                                                                    href="single-product.html">{{ $product->name_uz }}</a>
+                                                                    href="single-product.html">{{ $product->$name }}</a>
                                                             </p>
                                                             <p class="price"><span
                                                                     class="count">{{ $product->carts->sum('count') }}x</span>
-                                                                {{ $product->price }} so'm</p>
+                                                                {{ $product->price }} {{ __('words.value') }}</p>
                                                         </div>
                                                     </div>
                                                 @endif
@@ -285,15 +299,17 @@
                                         @if ($carts->count() != 0)
                                             <div class="cart-calculation">
                                                 <div class="calculation-details">
-                                                    <p class="total">Umumiy <span>{{ $sum }} sum</span></p>
+                                                    <p class="total">{{ __('words.umumiy') }}
+                                                        <span>{{ $sum }} {{ __('words.value') }}</span>
+                                                    </p>
                                                 </div>
                                                 <div class="floating-cart-btn text-center">
-                                                    <a href="">Hisob</a>
-                                                    <a href="{{ route('cart') }}">Ko'rish</a>
+                                                    <a href="">{{ __('words.hisob') }}</a>
+                                                    <a href="{{ route('cart') }}">{{ __('words.ko`rish') }}</a>
                                                 </div>
                                             </div>
                                         @else
-                                            <p class="text-sm alert alert-dark">Bo'sh</p>
+                                            <p class="text-sm alert alert-dark">{{ __('words.bo`sh') }}</p>
                                         @endif
                                     </div>
                                     <!-- end of cart floating box -->
@@ -305,9 +321,9 @@
                                             <span class="icon_bag_alt"></span>
                                         </div>
                                         <div class="cart-info d-inline-block">
-                                            <p>Savat
+                                            <p>{{ __('words.savat') }}
                                                 <span>
-                                                    0 dona - 0 so'm
+                                                    0 {{ __('words.dona') }} - 0 {{ __('words.value') }}
                                                 </span>
                                             </p>
                                         </div>
@@ -369,12 +385,12 @@
                                 <ul>
                                     @foreach ($headcategories as $headcategory)
                                         <li class="active menu-item-has-children"><a
-                                                href="#">{{ $headcategory->name_uz }}</a>
+                                                href="#">{{ $headcategory->$name }}</a>
                                             <ul class="sub-menu">
                                                 @foreach ($categories as $category)
                                                     @if ($category->head_category_id === $headcategory->id)
                                                         <li><a
-                                                                href="/#{{ $category->name_uz }}">{{ $category->emoji }}{{ $category->name_uz }}</a>
+                                                                href="/#{{ $category->$name }}">{{ $category->emoji }}{{ $category->$name }}</a>
                                                         </li>
                                                     @endif
                                                 @endforeach

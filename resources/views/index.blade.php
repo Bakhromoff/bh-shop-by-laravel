@@ -1,5 +1,7 @@
     @extends('layouts.app')
-
+    <?
+            $name = "name_".__('words.lang');
+        ?>
     @section('title')
         <title>Home</title>
     @endsection
@@ -24,21 +26,21 @@
         <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" data-interval="4000">
             <ol class="carousel-indicators">
                 <?
-                    $i = 0;
-                    ?>
+                                                        $i = 0;
+                                                        ?>
                 @foreach ($ads as $ad)
                     <li data-target="#carouselExampleIndicators" data-slide-to="{{ $ad->id }}"
                         class="{{ $i === 0 ? 'active' : '' }}"></li>
                     <?
-                        $i++;
-                        ?>
+                                                            $i++;
+                                                            ?>
                 @endforeach
 
             </ol>
             <div class="carousel-inner">
                 <?
-                        $i = 0;
-                        ?>
+                                                            $i = 0;
+                                                            ?>
                 @foreach ($ads as $ad)
                     <div class="carousel-item {{ $i === 0 ? 'active' : '' }}">
                         <img class="d-block w-100" src="{{ $ad->getImage() }}" style="max-width: 1600px; max-height: 600px;"
@@ -47,8 +49,8 @@
                         </div>
                     </div>
                     <?
-                        $i++;
-                        ?>
+                                                            $i++;
+                                                            ?>
                 @endforeach
             </div>
             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -89,7 +91,7 @@
                             @foreach ($brands as $brand)
                                 <div class="col">
                                     <div class="single-brand-logo">
-                                        <a href="{{route('brand_products', $brand->id)}}">
+                                        <a href="{{ route('brand_products', $brand->id) }}">
                                             <img src="{{ $brand->getImage() }}"
                                                 style="max-width: 186px; max-height: 92px; object-fit: contain;"
                                                 class="img-fluid" alt="">
@@ -109,8 +111,8 @@
         <!--=====  End of Brand logo slider  ======-->
 
         <!--=============================================
-                    =            Policy area         =
-                    =============================================-->
+                                                        =            Policy area         =
+                                                        =============================================-->
 
         <div class="policy-section mb-35">
             <div class="container">
@@ -151,8 +153,8 @@
         <!--=====  End of Policy area  ======-->
 
         <!--=============================================
-                        =            category slider         =
-                        =============================================-->
+                                                            =            category slider         =
+                                                            =============================================-->
 
         <div class="slider category-slider mb-35">
             <div class="container">
@@ -181,7 +183,7 @@
                                 @if ($category->isTop === 1)
                                     <div class="single-category">
                                         <div class="category-image">
-                                            <a href="#{{ $category->name_uz }}" title="{{ $category->name_uz }}"
+                                            <a href="#{{ $category->$name }}" title="{{ $category->$name }}"
                                                 style="width: 131px; height: 131px;">
                                                 <img src="{{ $category->getImage() }}" class="img-fluid"
                                                     style="object-fit: fill; width: 121px; height: 121px;" alt="">
@@ -189,7 +191,7 @@
                                         </div>
                                         <div class="category-title">
                                             <h3>
-                                                <a href="#{{ $category->name_uz }}">{{ $category->name_uz }}</a>
+                                                <a href="#{{ $category->$name }}">{{ $category->$name }}</a>
                                             </h3>
                                         </div>
                                     </div>
@@ -213,15 +215,15 @@
         <!--=====  End of category slider  ======-->
 
         <!--=============================================
-                            =            Tab slider         =
-                            =============================================-->
+                                                                =            Tab slider         =
+                                                                =============================================-->
 
         <section class="products py-5">
             <div class="container" style="box-shadow: 0px 5px 4px 0px rgb(0 0 0 / 10%);">
                 @foreach ($categories as $category)
                     @if ($category->category_products->count())
-                        <div class="products_list" id="{{ $category->name_uz }}">
-                            <h3 class="text-left">{{ $category->name_uz }}</h3>
+                        <div class="products_list" id="{{ $category->$name }}">
+                            <h3 class="text-left">{{ $category->$name }}</h3>
                             <div class="row pb-4">
                                 @foreach ($products as $product)
                                     @if ($product->category_id == $category->id)
@@ -263,10 +265,10 @@
                                                 <div class="product-content">
                                                     <div class="product-categories">
                                                         <a href="shop-left-sidebar.html"
-                                                            tabindex="0">{{ $product->category->name_uz }}</a>
+                                                            tabindex="0">{{ $product->category->$name }}</a>
                                                     </div>
                                                     <h3 class="product-title"><a href=""
-                                                            tabindex="0">{{ $product->name_uz }}</a></h3>
+                                                            tabindex="0">{!! Str::limit(strip_tags($product->$name), 25) !!}</a></h3>
                                                     <div class="price-box">
                                                         @if ($product->price < $product->old_price)
                                                             <span class="main-price">{{ $product->old_price }} sum</span>
@@ -320,7 +322,7 @@
                                                         <div class="col-lg-7 col-md-6 col-xs-12">
                                                             <!-- product quick view description -->
                                                             <div class="product-feature-details">
-                                                                <h2 class="product-title mb-15">{{ $product->name_uz }}
+                                                                <h2 class="product-title mb-15">{{ $product->$name }}
                                                                 </h2>
 
                                                                 <h2 class="product-price mb-15">
@@ -437,7 +439,7 @@
 
                                                 <div class="sale-single-product-content text-center">
                                                     <h2 class="product-title"><a
-                                                            href="single-product.html">{{ $product->name_uz }}</a></h2>
+                                                            href="single-product.html">{{ $product->$name }}</a></h2>
                                                     <h2 class="price">
                                                         @if ($product->price < $product->old_price)
                                                             <span class="main-price">{{ $product->old_price }} sum</span>

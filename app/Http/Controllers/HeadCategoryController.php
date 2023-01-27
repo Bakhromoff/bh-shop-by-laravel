@@ -77,8 +77,8 @@ class HeadCategoryController extends Controller
     public function update(Request $request, HeadCategory $headcategory)
     {
         $request->validate([
-            'name_ru' => 'required|max:20',
-            'name_uz' => 'required|max:20',
+            'name_ru' => 'required|max:30',
+            'name_uz' => 'required|max:30',
             'emoji' => 'required',
         ]);
         $headcategory->name_ru = $request->name_ru;

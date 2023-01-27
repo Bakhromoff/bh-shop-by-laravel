@@ -29,6 +29,8 @@ use App\Http\Controllers\MessageController;
 
 Auth::routes();
 
+Route::get('/lang/{lang}', [PageController::class, 'lang']);
+
 Route::resource('/products', ProductController::class)->middleware('admin');
 Route::resource('/categories', CategoryController::class)->middleware('admin');
 Route::resource('/ads', AdController::class)->middleware('admin');
@@ -56,3 +58,4 @@ Route::post('/wishes/{product}/store', [WishController::class, 'store'])->name('
 Route::post('/informations/store', [InformationController::class, 'store'])->name('informations.store')->middleware('admin');
 Route::post('/messages/store', [MessageController::class, 'store'])->name('messages.store');
 Route::put('/informations/{info}/update', [InformationController::class, 'update'])->name('informations.update')->middleware('admin');
+Route::post('/users/{user}/update', [HomeController::class, 'update'])->name('users.update')->middleware('auth');
